@@ -201,9 +201,8 @@ docker run -it  bayramalex/all_analysis  gcta64 --bfile test --make-grm-part 100
  
  with your own data: 
   
-    ```
+  ```
   docker run  -it -v  /your/local/path:/INPUT  bayramalex/all_analysis   gcta64 --bfile INPUT/your_data --make-grm-part 100 1 --thread-num 5 --out INPUT/your_data_output
- 
  ```
  
 
@@ -213,7 +212,8 @@ docker run -it  bayramalex/all_analysis  gcta64 --bfile test --make-grm-part 100
   
    with test data inside the container:
    
-       ```
+   ```   
+    
    docker run -it  bayramalex/all_analysis  bolt \
     --bfile=EUR_subset \
     --phenoFile=EUR_subset.pheno2.covars \
@@ -223,12 +223,16 @@ docker run -it  bayramalex/all_analysis  gcta64 --bfile test --make-grm-part 100
     --modelSnps=EUR_subset.modelSnps2 \
     --reml \
     --numThreads=2 \
-    2>&1 | tee example_reml2.log
-    ```
+    2>&1 | tee example_reml2.log 
     
-     with your own data : Lets work on with your own data placed on  /your/local/path. We need to assign this path to container with an arbitrary path,  lets say  /fld 
+  ```
+    
+    
+    
+ with your own data : Lets work on with your own data placed on  /your/local/path. We need to assign this path to container with an arbitrary path,  lets say  /fld 
    
-   docker run  -it -v   /your/local/path:/fld   bayramalex/all_analysis       bolt \
+    ```
+     docker run  -it -v   /your/local/path:/fld   bayramalex/all_analysis       bolt \
     --bfile=fld/EUR_subset \
     --phenoFile=fld/EUR_subset.pheno2.covars \
     --exclude=fld/EUR_subset.exclude2 \
@@ -238,7 +242,9 @@ docker run -it  bayramalex/all_analysis  gcta64 --bfile test --make-grm-part 100
     --reml \
     --numThreads=2 \
     2>&1 | tee fld/example_reml2.log
-   
+      
+      ```
+      
    
  #### METAL
  
@@ -252,7 +258,7 @@ docker run -it  bayramalex/all_analysis  king -b TOY_TARGET_DATA.bed  --related
   ```  
   
   
-   with your own data: 
+with your own data: 
   
   ``` 
   docker run  -it -v  /your/local/path:/INPUT  bayramalex/all_analysis    king -b INPUT/your_data  --related  
@@ -262,7 +268,7 @@ docker run -it  bayramalex/all_analysis  king -b TOY_TARGET_DATA.bed  --related
  
   with test data inside the container:
   
-    ```
+  ```
 docker run -it   bayramalex/all_analysis  flashpca --bfile  TOY_TARGET_DATA
   ```  
  
@@ -280,29 +286,29 @@ docker run -it   bayramalex/all_analysis  flashpca --bfile  TOY_TARGET_DATA
    
      with test data inside the container:
    
-      ``` 
+  ``` 
    docker run -it  bayramalex/all_analysis   /bin/bash -c   "plink --bfile test  --recode vcf-iid --out test_vcf  && qctool -g test_vcf.vcf  -og example.bgen"   
-     ```  
+  ```  
   
   with your own data
   
-      ``` 
+ ``` 
    docker run  -it -v  /your/local/path:/INPUT  bayramalex/all_analysis  /bin/bash -c   "plink --bfile  INPUT/your_data  --recode vcf-iid --out INPUT/test_vcf  && qctool -g INPUT/test_vcf.vcf  -og  INPUT/example.bgen"   
-    ``` 
+``` 
     
     #### vcftool
     
   with test data inside the container:
    
-      ``` 
+  ``` 
    docker run -it  bayramalex/all_analysis  /bin/bash -c   "plink --bfile test  --recode vcf-iid --out test_vcf  &&  vcftools --vcf test_vcf.vcf --recode-bcf --recode-INFO-all --out converted_output"   
-     ```  
+```  
      
  with your own data:
     
-         ``` 
+  ``` 
    docker run  -it -v  /your/local/path:/INPUT  bayramalex/all_analysis  /bin/bash -c   "plink --bfile  INPUT/your_data  --recode vcf-iid --out INPUT/test_vcf  && vcftools --vcf INPUT/test_vcf.vcf --recode-bcf --recode-INFO-all --out INPUT/converted_output"   
-    ``` 
+ ``` 
 
 
   
@@ -355,6 +361,8 @@ singularity exec -B  $(pwd):/INPUT /home/bayram/Gwas/imagename.sif plink    	 --
       	 --linear \
       	 --out /INPUT/BMIrs9674439
 ```
+
+Note that the resulting files will be put in  /INPUT/ which is your working directory.
 
 
  ### Other analysis
@@ -427,7 +435,7 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
   
    with test data inside the container:
    
-       ```
+ ```
   singularity exec   imagename2     bolt \
     --bfile=imagename2/EUR_subset \
     --phenoFile=imagename2/EUR_subset.pheno2.covars \
@@ -438,9 +446,10 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
     --reml \
     --numThreads=2 \
     2>&1 | tee imagename2/example_reml2.log
-    ```
     
-     with your own data : Lets work on with your own data placed on  /your/local/path. We need to assign this path to container with an arbitrary path,  lets say  /fld 
+  ```
+    
+ with your own data : Lets work on with your own data placed on  /your/local/path. We need to assign this path to container with an arbitrary path,  lets say  /fld 
      
         ```
      singularity exec  --bind   your/local/path:/fld path/of/the/container/imagename.sif    bolt \
@@ -470,14 +479,15 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
 ```
   with with your own data 
 
+ ```
 singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  king -b  /INPUT/your_data.bed  --related  
-
+```
 
  #### flashPCA
  
   with test data inside the container:
   
-    ```
+ ```
   singularity exec   imagename2 flashpca --bfile   imagename2/TOY_TARGET_DATA
   ```  
  
@@ -494,33 +504,33 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
    #### qctool # these is an issue on permission
    Conversion between .vcf and .bgen
    
-     with test data inside the container:
+ with test data inside the container:
    
-      ``` 
+ ``` 
    singularity exec   imagename2  qctool -g  imagename2/1kg_EU_qc_vcf.vcf -og  example.bgen  
-     ```  
+  ```  
   
   
   
   with your own data
   
-      ``` 
+ ``` 
   singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  qctool -g INPUT/test_vcf.vcf  -og  INPUT/example.bgen"   
-    ``` 
+ ``` 
     
     #### vcftool
     
   with test data inside the container:  (vcf to bcf)
    
-      ``` 
+  ``` 
   singularity exec   imagename2 vcftools --vcf  imagename2/1kg_EU_qc_vcf.vcf   --recode-bcf --recode-INFO-all --out converted_output   
-     ```  
+  ```  
      
  with your own data:
     
-         ``` 
+  ``` 
   singularity exec  --bind    your/local/path:/INPUT T path/of/the/container/imagename.sif  vcftools --vcf /INPUT/test_vcf.vcf --recode-bcf --recode-INFO-all --out /INPUT/converted_output  
-    ``` 
+``` 
   
 
  
