@@ -30,7 +30,7 @@ Data formatting tools
 Post-gwas analysis   # need to rename python_convert -> sumstats
 - Harmonize GWAS summary statistics  - https://github.com/precimed/python_convert/ sumstats.py  (this needs to be cleaned first )
 - Manhattan plot & QQ plots - https://github.com/precimed/python_convert/ manhattan.py and qq.py
-<separate container> LD Score Regression - https://github.com/bulik/ldsc    + public reference data
+
 
 
 
