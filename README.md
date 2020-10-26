@@ -1,4 +1,4 @@
-# Docker and Singularity containers for Polygenic Risk Score analysis
+# Docker and Singularity containers for Distributed Analysis
 
 Docker and Singularity containers to perform miscellaneous distributed analysis . Here are the all available tools:
 
