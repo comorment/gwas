@@ -36,7 +36,9 @@ Post-gwas analysis   # need to rename python_convert -> sumstats
 
 ## Getting Started
 
-In order to run the developed Docker and Singularity containers you need to install Docker (https://docs.docker.com/get-docker/) and Singularity (https://sylabs.io/guides/3.6/user-guide/quick_start.html?highlight=install),  respectively. You can run each container separately. You can find the details related to containers [here](docs/intro.md#section)
+In order to run the developed Docker and Singularity containers you need to install Docker (https://docs.docker.com/get-docker/) and Singularity (https://sylabs.io/guides/3.6/user-guide/quick_start.html?highlight=install),  respectively. You can run each container separately. 
+
+You can find the details related to containers [here](docs/intro.md#section)
  
 For plink see [here](docs/plink.md#section)
 
