@@ -116,7 +116,7 @@ docker run  -v  /your/local/path:/INPUT dockerhub_username/imagename <your_comma
 
 ```
 
-If you want to use any data from your local path, you need to call it as  INPUT/name_of_your_data. For details See
+If you want to use any data from your local path, you need to call it as  INPUT/name_of_your_data. For details, you can have a look for the examples such as [plink](plink.md#section)
 
 
 ## For Singularity Container
@@ -187,7 +187,7 @@ singularity exec -B  /your/local/path:/INPUT /path/of/the/container/imagename.si
 
 ```
 
-For details see: [link](plink.md#section)
+For details, you can have a look for the examples such as [plink](plink.md#section)
 
 
 
