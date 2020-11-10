@@ -1,6 +1,6 @@
-# Docker and Singularity containers for Polygenic Risk Score analysis
+# Singularity container for GWAS and post-GWAS analysis
 
-Docker and Singularity containers to perform miscellaneous distributed analysis . Here are the all available tools:
+Singularity container to perform miscellaneous distributed analysis . Here are the all available tools:
 
 General software
 - R + basic modules (ggplot, table  etc)
