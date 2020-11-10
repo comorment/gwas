@@ -140,7 +140,7 @@ In the following examples we will use these two created containers called  image
 Run the container by mounting this directory
 
 ```
-singularity exec -B  $(pwd):/INPUT /path/of/the/container/imagename.sif  <your plink analysis>
+singularity exec --no-home -B  $(pwd):/INPUT /path/of/the/container/imagename.sif  <your plink analysis>
 
 ```
 
@@ -148,13 +148,13 @@ For Example
 
 ```
  
- singularity exec -B  $(pwd):/INPUT /home/bayram/Gwas/imagename.sif  plink   --bfile  /INPUT/1kg_EU_BMI --pheno /INPUT/BMI_pheno.txt   --make-bed --out /INPUT/1kg_EU_BMI 
+ singularity exec --no-home -B  $(pwd):/INPUT /home/bayram/Gwas/imagename.sif  plink   --bfile  /INPUT/1kg_EU_BMI --pheno /INPUT/BMI_pheno.txt   --make-bed --out /INPUT/1kg_EU_BMI 
 
 ```
 
 
 ```
-singularity exec -B  $(pwd):/INPUT /home/bayram/Gwas/imagename.sif plink    	 --bfile /INPUT/1kg_EU_BMI \
+singularity exec --no-home -B  $(pwd):/INPUT /home/bayram/Gwas/imagename.sif plink    	 --bfile /INPUT/1kg_EU_BMI \
         	 --snps rs9674439 \
        	 --assoc \
       	 --linear \
