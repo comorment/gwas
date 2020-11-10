@@ -173,7 +173,7 @@ docker run -it   bayramalex/all_analysis  flashpca --bfile  TOY_TARGET_DATA
  
  
  ```
-singularity exec -B  $(pwd):/INPUT /home/bayram/GRSworkflow/imagename.sif Rscript PRSice.R --dir . \
+singularity exec --no-home -B  $(pwd):/INPUT /home/bayram/GRSworkflow/imagename.sif Rscript PRSice.R --dir . \
     --prsice PRSice_linux \
     --base /INPUT/BMI.txt \
     --target /INPUT/1kg_hm3_qc \
@@ -195,7 +195,7 @@ singularity exec -B  $(pwd):/INPUT /home/bayram/GRSworkflow/imagename.sif Rscrip
 
 
 ```
-singularity exec imagename2  Rscript  imagename2/PRSice.R --dir . \
+singularity exec --no-home imagename2  Rscript  imagename2/PRSice.R --dir . \
     --prsice /PRSice_linux \
     --base imagename2/BMI.txt \
     --target imagename2/1kg_hm3_qc \
@@ -220,13 +220,13 @@ singularity exec imagename2  Rscript  imagename2/PRSice.R --dir . \
  with test data inside the container:
 
  ```
-  singularity exec   imagename2     gcta64 --bfile  imagename2/1kg_EU_qc  --make-grm-part 100 1 --thread-num 5 --out  your_data_output
+  singularity exec --no-home   imagename2     gcta64 --bfile  imagename2/1kg_EU_qc  --make-grm-part 100 1 --thread-num 5 --out  your_data_output
  ```
  
   with with your own data 
   
 ```
-singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  gcta64 --bfile /INPUT/your_data  --make-grm-part 100 1 --thread-num 5 --out /INPUT/your_data_output
+singularity exec --no-home  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  gcta64 --bfile /INPUT/your_data  --make-grm-part 100 1 --thread-num 5 --out /INPUT/your_data_output
 ```
 
 
@@ -236,7 +236,7 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
    with test data inside the container:
    
        ```
-  singularity exec   imagename2     bolt \
+  singularity exec --no-home   imagename2     bolt \
     --bfile=imagename2/EUR_subset \
     --phenoFile=imagename2/EUR_subset.pheno2.covars \
     --exclude=imagename2/EUR_subset.exclude2 \
@@ -251,7 +251,7 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
      with your own data : Lets work on with your own data placed on  /your/local/path. We need to assign this path to container with an arbitrary path,  lets say  /fld 
      
         ```
-     singularity exec  --bind   your/local/path:/fld path/of/the/container/imagename.sif    bolt \
+     singularity exec --no-home  --bind   your/local/path:/fld path/of/the/container/imagename.sif    bolt \
     --bfile=/fld/EUR_subset \
     --phenoFile=/fld/EUR_subset.pheno2.covars \
     --exclude=/fld/EUR_subset.exclude2 \
@@ -274,11 +274,11 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
   with test data inside the container:
 
  ```
-  singularity exec   imagename2    king -b  imagename2/TOY_TARGET_DATA.bed  --related  
+  singularity exec --no-home   imagename2    king -b  imagename2/TOY_TARGET_DATA.bed  --related  
 ```
   with with your own data 
 
-singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  king -b  /INPUT/your_data.bed  --related  
+singularity exec --no-home  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  king -b  /INPUT/your_data.bed  --related  
 
 
  ### flashPCA
@@ -286,13 +286,13 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
   with test data inside the container:
   
     ```
-  singularity exec   imagename2 flashpca --bfile   imagename2/TOY_TARGET_DATA
+  singularity exec --no-home   imagename2 flashpca --bfile   imagename2/TOY_TARGET_DATA
   ```  
  
  with your own data 
  
    ``` 
-  singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  flashpca --bfile   /INPUT/your_data
+  singularity exec --no-home  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  flashpca --bfile   /INPUT/your_data
    ```  
    
    
@@ -305,7 +305,7 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
      with test data inside the container:
    
       ``` 
-   singularity exec   imagename2  qctool -g  imagename2/1kg_EU_qc_vcf.vcf -og  example.bgen  
+   singularity exec --no-home   imagename2  qctool -g  imagename2/1kg_EU_qc_vcf.vcf -og  example.bgen  
      ```  
   
   
@@ -313,7 +313,7 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
   with your own data
   
       ``` 
-  singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  qctool -g INPUT/test_vcf.vcf  -og  INPUT/example.bgen"   
+  singularity exec --no-home  --bind   your/local/path:/INPUT path/of/the/container/imagename.sif  qctool -g INPUT/test_vcf.vcf  -og  INPUT/example.bgen"   
     ``` 
     
     ### vcftool
@@ -321,13 +321,13 @@ singularity exec  --bind   your/local/path:/INPUT path/of/the/container/imagenam
   with test data inside the container:  (vcf to bcf)
    
       ``` 
-  singularity exec   imagename2 vcftools --vcf  imagename2/1kg_EU_qc_vcf.vcf   --recode-bcf --recode-INFO-all --out converted_output   
+  singularity exec --no-home   imagename2 vcftools --vcf  imagename2/1kg_EU_qc_vcf.vcf   --recode-bcf --recode-INFO-all --out converted_output   
      ```  
      
  with your own data:
     
          ``` 
-  singularity exec  --bind    your/local/path:/INPUT T path/of/the/container/imagename.sif  vcftools --vcf /INPUT/test_vcf.vcf --recode-bcf --recode-INFO-all --out /INPUT/converted_output  
+  singularity exec --no-home  --bind    your/local/path:/INPUT T path/of/the/container/imagename.sif  vcftools --vcf /INPUT/test_vcf.vcf --recode-bcf --recode-INFO-all --out /INPUT/converted_output  
     ``` 
   
 
