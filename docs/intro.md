@@ -1,6 +1,6 @@
 # Docker and Singularity containers for GWAS analysis
 
-Docker and Singularity containers to perform Genome-wide association study (GWAS) via Plink 1.9 (http://zzz.bwh.harvard.edu/plink/) .
+Docker and Singularity containers to perform Genome-wide association study (GWAS) via Plink 1.9 (http://zzz.bwh.harvard.edu/plink/). If you have knowledge about containers you may skip this part and directly move to [here](/docs/plink.md #section)
 
 ## Getting Started
 
