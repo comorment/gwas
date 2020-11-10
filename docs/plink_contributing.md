@@ -12,7 +12,7 @@ Note that you can try many different analysis other than the one  presented here
 1. Pull the docker container from Docker Hub
 
 ```
-docker pull bayramalex/all_analysis
+docker pull bayramalex/gwastools
 
 ```
 
@@ -21,14 +21,14 @@ docker pull bayramalex/all_analysis
 ## Passive mode
 
 ```
-docker run  bayramalex/all_analysis <your Plink analysis>
+docker run  bayramalex/gwastools <your Plink analysis>
 
 ```
 
 Example: 
 
 ```
-docker run  bayramalex/all_analysis plink   	 --bfile 1kg_EU_qc\
+docker run  bayramalex/gwastools plink   	 --bfile 1kg_EU_qc\
          	 --pheno BMI_pheno.txt \
        	 --make-bed --out 1kg_EU_BMI 
     
@@ -38,7 +38,7 @@ docker run  bayramalex/all_analysis plink   	 --bfile 1kg_EU_qc\
 ## Interactive mode
 
 ```
-docker run  -it bayramalex/all_analysis
+docker run  -it bayramalex/gwastools
 
 ```
 
@@ -73,13 +73,13 @@ You can observe the created  1kg_EU_BMI.bed + 1kg_EU_BMI.bim + 1kg_EU_BMI.fam  i
 It is desired to do analysis with your own data. At this point it is required to mount  a path to the container and do analysis on the data in this path. 
 
 ```
-docker run  -it -v  /your/local/path:/INPUT bayramalex/all_analysis
+docker run  -it -v  /your/local/path:/INPUT bayramalex/gwastools
 
 ```
 For  example
 
 ```
-docker run  -it -v  /Users/bayramakdeniz/mydataset:/INPUT bayramalex/all_analysis
+docker run  -it -v  /Users/bayramakdeniz/mydataset:/INPUT bayramalex/gwastools
 
 ```
 
@@ -99,7 +99,7 @@ Once you run this, you will observe an interactive container with an additional 
  It is also possible to run it with passive mode as:
  
  ```
-docker run   -v  /your/local/path:/INPUT bayramalex/all_analysis ./plink    --bfile INPUT/1kg_EU_BMI \
+docker run   -v  /your/local/path:/INPUT bayramalex/gwastools ./plink    --bfile INPUT/1kg_EU_BMI \
         	 --snps rs9674439 \
        	 --assoc \
       	 --linear \
@@ -117,14 +117,14 @@ docker run   -v  /your/local/path:/INPUT bayramalex/all_analysis ./plink    --bf
 1- Build Singularity image from Docker Hub
 
  ```
-singularity build imagename.sif docker://bayramalex/all_analysis:latest
+singularity build imagename.sif docker://bayramalex/gwastools:latest
 
 ```
 
 Alternatively you can build it as  'sandbox' to use it in passive mode
 
 ```
-singularity build --sandbox imagename2/  docker://bayramalex/all_analysis:latest
+singularity build --sandbox imagename2/  docker://bayramalex/gwastools:latest
 
 ```
 
