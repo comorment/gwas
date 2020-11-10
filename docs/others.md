@@ -83,6 +83,7 @@ with test data inside the container:
     
   with your own data : Lets work on with your own data placed on  /your/local/path. We need to assign this path to container with an arbitrary path,  lets say  /fld 
    
+   ```
    docker run  -it -v   /your/local/path:/fld   bayramalex/gwastools       bolt \
     --bfile=fld/EUR_subset \
     --phenoFile=fld/EUR_subset.pheno2.covars \
@@ -93,6 +94,7 @@ with test data inside the container:
     --reml \
     --numThreads=2 \
     2>&1 | tee fld/example_reml2.log
+  ```
    
    
  ## METAL
