@@ -3,166 +3,138 @@ FROM 'ubuntu:18.04'
 ENV TZ=Europe
 ENV DEBIAN_FRONTEND noninteractive
 
-#required tools
-RUN apt-get update && apt-get install -y  --no-install-recommends apt-utils\
-    python3 \
-    python3-pip \
-    tar \
-    wget \
-    unzip \
-    git  \
-  libgsl0-dev \
-   perl \
-    less \
-    parallel \
-    && \
-    rm -rf /var/lib/apt/lists/*
+
+# Essential Tools
+WORKDIR /tools/essential
+COPY /scripts/essential_tools.sh /tools/essential
+RUN chmod +x essential_tools.sh
+RUN bash essential_tools.sh
+
+# Plink
+WORKDIR /tools/plink
+COPY /scripts/install_plink.sh /tools/plink
+RUN chmod +x install_plink.sh
+RUN bash install_plink.sh
 
 
-    # R
-    RUN apt-get update && apt-get install -y r-base &&  apt-get install -y r-cran-ggplot2  &&  apt-get install -y  r-cran-data.table &&  apt-get install -y r-cran-optparse && apt-get install -y  libnss3
+# prsice
+WORKDIR /tools/prsice
+COPY /scripts/install_prsice.sh /tools/prsice
+RUN chmod +x install_prsice.sh
+RUN bash install_prsice.sh
 
+# Bolt LMM
 
+WORKDIR /tools/bolt
+COPY /scripts/install_bolt.sh /tools/bolt
+RUN chmod +x install_bolt.sh
+RUN bash install_bolt.sh
 
-    # Rmarkdown
-    RUN apt-get install -y pandoc &&  apt-get install -y pandoc-citeproc
+# gcta
 
-     RUN R -e "install.packages('rmarkdown')"
-
-
-
-    # PRSice
-
-RUN wget https://github.com/choishingwan/PRSice/releases/download/2.3.3/PRSice_linux.zip  && \
-    unzip PRSice_linux.zip  && \
-    rm -rf PRSice_linux.zip
-
-
-RUN mkdir tools
-
-
-
-# plink
-
-RUN  wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20200616.zip && \
-     unzip -j plink_linux_x86_64_20200616.zip && \
-     rm -rf plink_linux_x86_64_20200616.zip
-
-
-
-
-# LMM
-
-RUN wget https://storage.googleapis.com/broad-alkesgroup-public/BOLT-LMM/downloads/BOLT-LMM_v2.3.4.tar.gz && \
-tar -xvzf BOLT-LMM_v2.3.4.tar.gz && \
-rm -rf BOLT-LMM_v2.3.4.tar.gz
-# cp -a /BOLT-LMM_v2.3.4/lib/. /lib/ && \
-# cp -a /BOLT-LMM_v2.3.4/example/. /
-
-
-# GCTA
-
-RUN wget https://cnsgenomics.com/software/gcta/bin/gcta_1.93.2beta.zip && \
-    unzip -j  gcta_1.93.2beta.zip && \
-    rm -rf gcta_1.93.2beta.zip
-
-
+WORKDIR /tools/gcta
+COPY /scripts/install_gcta.sh /tools/gcta
+RUN chmod +x install_gcta.sh
+RUN bash install_gcta.sh
 
 # python_convert
- RUN git clone https://github.com/precimed/python_convert.git
 
-RUN apt-get update && apt-get install -y  --no-install-recommends apt-utils\
- python3-pandas\
- python3-numpy\
- python3-scipy\
- python3-matplotlib
-
-# Data formatting
-# qctool
-RUN wget https://www.well.ox.ac.uk/~gav/resources/qctool_v2.0.6-Ubuntu16.04-x86_64.tgz && \
-    tar -xvzf qctool_v2.0.6-Ubuntu16.04-x86_64.tgz && \
-    rm -rf  qctool_v2.0.6-Ubuntu16.04-x86_64.tgz
-
- #vcftools
-     RUN git clone https://github.com/vcftools/vcftools.git && \
-     cd vcftools && \
-      ./autogen.sh && \
-      ./configure && \
-       make && \
-       make install
-
-#Bcftools
-
- RUN  git clone git://github.com/samtools/htslib.git && \
-git clone git://github.com/samtools/bcftools.git && \
-cd bcftools && \
-apt-get install -y curl && \
-apt-get install -y libcurl4-gnutls-dev &&  \
-#autoheader && autoconf && ./configure --enable-libgsl --enable-perl-filters && \
-make
+WORKDIR /tools/python_convert
+COPY /scripts/python_convert.sh /tools/python_convert
+RUN chmod +x python_convert.sh
+RUN bash python_convert.sh
 
 
-#end of data formatting
+# qctools
 
-# GCTB
-RUN wget https://cnsgenomics.com/software/gctb/download/gctb_2.02_Linux.zip  && \
-    unzip   gctb_2.02_Linux.zip && \
-    rm -rf gctb_2.02_Linux.zip
+WORKDIR /tools/qctools
+COPY /scripts/install_qctools.sh /tools/qctools
+RUN chmod +x install_qctools.sh
+RUN bash install_qctools.sh
 
-# LD
+# vcftools
 
-RUN git clone https://github.com/zhenin/HDL.git
-
-# meta analysis
-
-RUN wget  http://csg.sph.umich.edu/abecasis/metal/download/Linux-metal.tar.gz && \
-    tar -xvzf Linux-metal.tar.gz && \
-    rm -rf  Linux-metal.tar.gz
-
-# Relatedness/PCA
-
-#KING
-RUN wget http://people.virginia.edu/~wc9c/KING/Linux-king.tar.gz && \
-  tar -xvzf Linux-king.tar.gz && \
-  rm -rf Linux-king.tar.gz
+WORKDIR /tools/vcftools
+COPY /scripts/install_vcftools.sh /tools/vcftools
+RUN chmod +x install_vcftools.sh
+RUN bash install_vcftools.sh
 
 
+# Bcftools
 
-    # copy all binaries to /bin
- RUN cp /plink  /PRSice_linux /gcta64 /qctool_v2.0.6-Ubuntu16.04-x86_64/qctool /gctb_2.02_Linux/gctb /bcftools/bcftools generic-metal/metal king BOLT-LMM_v2.3.4/bolt   /bin
- RUN mv /plink  /PRSice_linux /gcta64 /qctool_v2.0.6-Ubuntu16.04-x86_64 /gctb_2.02_Linux /bcftools /generic-metal king BOLT-LMM_v2.3.4 vcftools htslib python_convert /HDL   /tools
+WORKDIR /tools/bcftools
+COPY /scripts/install_bcftools.sh /tools/bcftools
+RUN chmod +x install_bcftools.sh
+RUN bash install_bcftools.sh
 
-# RUN plink --bfile 1kg_EU_qc  --recode vcf-iid --out 1kg_EU_qc_vcf
+# gctb
 
-# dataset for prsice
+WORKDIR /tools/gctb
+COPY /scripts/install_gctb.sh /tools/gctb
+RUN chmod +x install_gctb.sh
+RUN bash install_gctb.sh
 
-#RUN wget https://5c2d08d4-17d1-4dd8-bb49-f9593683e642.filesusr.com/archives/e7bc47_f74626b357ed453584e9e775713fe9ac.zip?dn=data_chapter10.zip && \
-#unzip -j  e7bc47_f74626b357ed453584e9e775713fe9ac.zip?dn=data_chapter10.zip  && \
-#rm -rf   e7bc47_f74626b357ed453584e9e775713fe9ac.zip?dn=data_chapter10.zip
+# hdl
+
+WORKDIR /tools/hdl
+COPY /scripts/install_hdl.sh /tools/hdl
+RUN chmod +x install_hdl.sh
+RUN bash install_hdl.sh
+
+# metal
+
+WORKDIR /tools/metal
+COPY /scripts/install_metal.sh /tools/metal
+RUN chmod +x install_metal.sh
+RUN bash install_metal.sh
+
+# king
+
+WORKDIR /tools/king
+COPY /scripts/install_king.sh /tools/king
+RUN chmod +x install_king.sh
+RUN bash install_king.sh
 
 # Rstudio
 
-  RUN apt-get update && \
-   wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.3.1093-amd64-debian.tar.gz && \
-   tar -xvzf rstudio-1.3.1093-amd64-debian.tar.gz && \
-   rm -rf rstudio-1.3.1093-amd64-debian.tar.gz && \
-   mv  rstudio-1.3.1093 \tools
+WORKDIR /tools/rstudio
+COPY /scripts/install_rstudio.sh /tools/rstudio
+RUN chmod +x install_rstudio.sh
+RUN bash install_rstudio.sh
 
-#RUN apt-get install -y gdebi-core && \
-# wget   https://download2.rstudio.org/server/xenial/amd64/rstudio-server-1.3.1093-amd64.deb && \
-# gdebi rstudio-server-1.3.1093-amd64.deb
 
-#RUN apt-get install -y dpkg-sig && \
- #gpg --keyserver keys.gnupg.net --recv-keys 3F32EE77E331692F && \
- #dpkg-sig --verify rstudio-server-1.3.1093-amd64.deb
+# flashPCA
 
-# Jupyter
+#WORKDIR /tools/flashpca
+#COPY /scripts/install_flashpca.sh /tools/flashpca
+#RUN chmod +x install_flashpca.sh
+#RUN bash install_flashpca.sh
 
-#RUN apt-get install python3-pip
+WORKDIR /tools/miniconda
+COPY /scripts/miniconda.sh /tools/miniconda
+RUN chmod +x miniconda.sh
+RUN bash miniconda.sh
 
-#RUN pip3 install -vU setuptools
+WORKDIR /tools/miniconda3
+COPY /scripts/miniconda3.sh /tools/miniconda3
+RUN chmod +x miniconda3.sh
+RUN bash miniconda3.sh
 
-RUN apt-get install -y jupyter
+# saige
+
+#WORKDIR /tools/saige
+#COPY /scripts/install_saige.sh /tools/saige
+#RUN chmod +x install_saige.sh
+#RUN bash install_saige.sh
+
+#genomicsam
+
+WORKDIR /tools/genomicsam
+COPY /scripts/install_genomicsam.sh /tools/genomicsam
+RUN chmod +x install_genomicsam.sh
+RUN bash install_genomicsam.sh
+
+# flashPCA
 
 
 #flashPCA (from developers' guide)
@@ -203,4 +175,14 @@ RUN cd flashpca && \
 
 
  RUN userdel -r flashpca-user
+
+ # Essential Tools
+ WORKDIR /tools/additional
+ COPY /scripts/additional_tools.sh /tools/additional
+ RUN chmod +x additional_tools.sh
+ RUN bash additional_tools.sh
+
+
  WORKDIR /
+ RUN mkdir toydata
+RUN cp tools/prsice/TOY_BASE_GWAS.assoc  tools/prsice/TOY_TARGET_DATA.bim tools/prsice/TOY_TARGET_DATA.bed tools/prsice/TOY_TARGET_DATA.fam tools/prsice/TOY_TARGET_DATA.pheno /toydata
