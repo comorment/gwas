@@ -1,7 +1,7 @@
 
 ## Getting Started
 
-* Download ``gwastools.sif`` and ``hello_demo.tar.gz`` files from [here](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing)
+* Download ``gwastools.sif`` (placed inside gwastools_v1.1) and ``hello_demo.tar.gz`` files from [here](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing)
 * Import both files to your secure HPC environment (i.e. TSD, Bianca, Computerome, or similar).
 * Run ``tar -xzvf hello_demo.tar.gz`` to extract demo data.
 * Run ``singularity exec --no-home gwastools.sif plink --help``, to validate that you can run singularity. This command is expected to produce the standard plink help message, starting like this:
