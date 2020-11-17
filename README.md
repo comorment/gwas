@@ -22,10 +22,18 @@ Relatedness / PCA analysis
 - KING http://people.virginia.edu/~wc9c/KING/
 - flashPCA https://github.com/gabraham/flashpca
 
+Genetic Epidemiology
+- HDL  https://github.com/zhenin/HDL 
+-GenomicSEM https://github.com/MichelNivard/GenomicSEM/wiki/1.-Installing-GenomicSEM
+
+-GCTA https://cnsgenomics.com/software/gcta/#Overview
+-GCTB. https://cnsgenomics.com/software/gctb/
+
 Data formatting tools
 - https://www.well.ox.ac.uk/~gav/qctool_v2/
 - http://vcftools.sourceforge.net/
 - http://samtools.github.io/bcftools/bcftools.html
+
 
 Post-gwas analysis   # need to rename python_convert -> sumstats
 - Harmonize GWAS summary statistics  - https://github.com/precimed/python_convert/ sumstats.py  (this needs to be cleaned first )
