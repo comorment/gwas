@@ -5,13 +5,15 @@ ENV TZ=Europe
 ENV DEBIAN_FRONTEND noninteractive
 
 # Essential Tools
-WORKDIR /tools/essential
-COPY /scripts/essential_tools.sh /tools/essential
-RUN chmod +x essential_tools.sh
-RUN bash essential_tools.sh
+WORKDIR /tmp
+COPY /scripts/apt_get_essential.sh .
+RUN chmod +x apt_get_essential.sh
+RUN bash apt_get_essential.sh
 
 # Plink
 WORKDIR /tools/plink
-COPY /scripts/install_plink.sh /tools/plink
-RUN chmod +x install_plink.sh
-RUN bash install_plink.sh
+COPY /scripts/install_plink.sh /tmp
+RUN chmod +x /tmp/install_plink.sh
+RUN bash /tmp/install_plink.sh
+
+WORKDIR /tools

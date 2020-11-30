@@ -3,8 +3,7 @@
 
 # vcfools
 
- git clone https://github.com/vcftools/vcftools.git && \
-cd vcftools && \
+ git clone https://github.com/vcftools/vcftools.git . && \
  ./autogen.sh && \
  ./configure && \
   make && \

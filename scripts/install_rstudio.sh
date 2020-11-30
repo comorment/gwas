@@ -1,7 +1,6 @@
 #!/bin/sh
 
 
-# metal
 
  apt-get update && \
    wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.3.1093-amd64-debian.tar.gz && \
