@@ -1,8 +1,8 @@
+# gwas container
 FROM 'ubuntu:18.04'
 
 ENV TZ=Europe
 ENV DEBIAN_FRONTEND noninteractive
-
 
 # Essential Tools
 WORKDIR /tools/essential
@@ -16,7 +16,6 @@ COPY /scripts/install_plink.sh /tools/plink
 RUN chmod +x install_plink.sh
 RUN bash install_plink.sh
 
-
 # prsice
 WORKDIR /tools/prsice
 COPY /scripts/install_prsice.sh /tools/prsice
@@ -24,87 +23,72 @@ RUN chmod +x install_prsice.sh
 RUN bash install_prsice.sh
 
 # Bolt LMM
-
 WORKDIR /tools/bolt
 COPY /scripts/install_bolt.sh /tools/bolt
 RUN chmod +x install_bolt.sh
 RUN bash install_bolt.sh
 
 # gcta
-
 WORKDIR /tools/gcta
 COPY /scripts/install_gcta.sh /tools/gcta
 RUN chmod +x install_gcta.sh
 RUN bash install_gcta.sh
 
 # python_convert
-
 WORKDIR /tools/python_convert
 COPY /scripts/python_convert.sh /tools/python_convert
 RUN chmod +x python_convert.sh
 RUN bash python_convert.sh
 
-
 # qctools
-
 WORKDIR /tools/qctools
 COPY /scripts/install_qctools.sh /tools/qctools
 RUN chmod +x install_qctools.sh
 RUN bash install_qctools.sh
 
 # vcftools
-
 WORKDIR /tools/vcftools
 COPY /scripts/install_vcftools.sh /tools/vcftools
 RUN chmod +x install_vcftools.sh
 RUN bash install_vcftools.sh
 
-
 # Bcftools
-
 WORKDIR /tools/bcftools
 COPY /scripts/install_bcftools.sh /tools/bcftools
 RUN chmod +x install_bcftools.sh
 RUN bash install_bcftools.sh
 
 # gctb
-
 WORKDIR /tools/gctb
 COPY /scripts/install_gctb.sh /tools/gctb
 RUN chmod +x install_gctb.sh
 RUN bash install_gctb.sh
 
 # hdl
-
 WORKDIR /tools/hdl
 COPY /scripts/install_hdl.sh /tools/hdl
 RUN chmod +x install_hdl.sh
 RUN bash install_hdl.sh
 
 # metal
-
 WORKDIR /tools/metal
 COPY /scripts/install_metal.sh /tools/metal
 RUN chmod +x install_metal.sh
 RUN bash install_metal.sh
 
 # king
-
 WORKDIR /tools/king
 COPY /scripts/install_king.sh /tools/king
 RUN chmod +x install_king.sh
 RUN bash install_king.sh
 
 # Rstudio
-
 WORKDIR /tools/rstudio
 COPY /scripts/install_rstudio.sh /tools/rstudio
 RUN chmod +x install_rstudio.sh
 RUN bash install_rstudio.sh
 
-
 # flashPCA
-
 #WORKDIR /tools/flashpca
 #COPY /scripts/install_flashpca.sh /tools/flashpca
 #RUN chmod +x install_flashpca.sh
@@ -121,23 +105,18 @@ RUN chmod +x miniconda3.sh
 RUN bash miniconda3.sh
 
 # saige
-
 #WORKDIR /tools/saige
 #COPY /scripts/install_saige.sh /tools/saige
 #RUN chmod +x install_saige.sh
 #RUN bash install_saige.sh
 
-#genomicsam
-
+# genomicsam
 WORKDIR /tools/genomicsam
 COPY /scripts/install_genomicsam.sh /tools/genomicsam
 RUN chmod +x install_genomicsam.sh
 RUN bash install_genomicsam.sh
 
-# flashPCA
-
-
-#flashPCA (from developers' guide)
+# flashPCA (from developers' guide)
 RUN mkdir flashpca-build
 RUN apt-get update && \
    apt-get -y install python2.7 python-pip libboost1.62-all-dev \
@@ -169,20 +148,16 @@ RUN cd flashpca && \
    EIGEN_INC=/usr/include/eigen3 \
    BOOST_INC=/usr/include/boost \
    SPECTRA_INC=$HOME/spectra-0.8.1/include
+USER root
+RUN cp flashpca/flashpca /bin && cp flashpca/flashpca /tools
+RUN userdel -r flashpca-user
 
- USER root
- RUN cp flashpca/flashpca /bin && cp flashpca/flashpca /tools
+# Additional tools
+WORKDIR /tools/additional
+COPY /scripts/additional_tools.sh /tools/additional
+RUN chmod +x additional_tools.sh
+RUN bash additional_tools.sh
 
-
- RUN userdel -r flashpca-user
-
- # Essential Tools
- WORKDIR /tools/additional
- COPY /scripts/additional_tools.sh /tools/additional
- RUN chmod +x additional_tools.sh
- RUN bash additional_tools.sh
-
-
- WORKDIR /
- RUN mkdir toydata
+WORKDIR /
+RUN mkdir toydata
 RUN cp tools/prsice/TOY_BASE_GWAS.assoc  tools/prsice/TOY_TARGET_DATA.bim tools/prsice/TOY_TARGET_DATA.bed tools/prsice/TOY_TARGET_DATA.fam tools/prsice/TOY_TARGET_DATA.pheno /toydata
