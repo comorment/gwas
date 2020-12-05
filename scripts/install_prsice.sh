@@ -8,4 +8,4 @@
     rm -rf PRSice_linux.zip
 
 cp PRSice_linux  /bin
-cp PRSice.R  /
+#cp PRSice.R  /
