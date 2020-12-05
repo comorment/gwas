@@ -22,6 +22,18 @@ COPY /scripts/install_prsice.sh /tmp
 RUN chmod +x /tmp/install_prsice.sh
 RUN bash /tmp/install_prsice.sh
 
+# simu
+WORKDIR /tools/simu
+COPY /scripts/install_simu.sh /tmp
+RUN chmod +x /tmp/install_simu.sh
+RUN bash /tmp/install_simu.sh
+
+# Plink2
+WORKDIR /tools/plink2
+COPY /scripts/install_plink2.sh /tmp
+RUN chmod +x /tmp/install_plink2.sh
+RUN bash /tmp/install_plink2.sh
+
 # Bolt LMM
 #WORKDIR /tools/bolt
 #COPY /scripts/install_bolt.sh /tmp
