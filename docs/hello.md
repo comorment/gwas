@@ -32,4 +32,4 @@ and will shortly make this available here: https://github.com/comorment/gwas .
   singularity exec --no-home -B $(pwd):/data hello.sif plink --bfile /data/chr21 --freq --out /data/chr21
   ```
 
-Please [let us know](https://github.com/comorment/demo/issues/new) if you face any problems.
+Please [let us know](https://github.com/comorment/gwas/issues/new) if you face any problems.
