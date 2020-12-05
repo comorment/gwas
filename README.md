@@ -2,7 +2,9 @@ This repository is used to develop and describe singularity containers with vari
 
 For new users we recommend to go over introductory instructions in [docs/hello.md](docs/hello.md).
 
-If you would like to contribute to developing these containers, see instructions in [docs/contributing.md](docs/contributing.md).
+If you would like to contribute to developing these containers, see  [docs/contributing.md](docs/contributing.md).
+
+For a tutorial on GWAS with synthetic data, see [docs/gwas.md](docs/gwas.md)
 
 The containers are currently organized as follows:
 
