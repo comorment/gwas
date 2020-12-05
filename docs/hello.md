@@ -1,4 +1,5 @@
-# Singularity containers for GWAS and post-GWAS analysis (DEMO).
+# Hello container
+Singularity containers for GWAS and post-GWAS analysis (DEMO).
 
 This repository described a Hello World Singularity container, which you may use to familiraze yourself with Singularity (https://sylabs.io/docs/) and the way it works on your secure HPC environment (TSD, Bianca, Computerome, or similar).
 This singularity container is indented as a demo. 
