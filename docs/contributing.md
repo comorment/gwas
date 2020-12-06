@@ -1,3 +1,8 @@
+# Maintaining reference dataset
+
+Reference dataset is maintained as a github repository here:  https://github.com/norment/comorment_data
+Note that this repository has ``git lfs`` support enabled.
+
 # Installing Docker and Singularity
 
 * TBD: provide insturctions for Docker installation.
