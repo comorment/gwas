@@ -14,3 +14,9 @@ The containers are currently organized as follows:
 * matlab - container allowing to run pre-compiled MATLAB software. This container also has OCTAVE installed.
 * R - contaienr for R analysis (installed by native R package manager)
 
+All containers are shared on [Google Drive](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing).
+
+The instructions also assume that
+* you download a ``comorment_ref.tar.gz`` file from the Google drive folder,
+* extract it (using ``tar -xzvf comorment_ref.tar.gz``) command,
+* create an environmental variable ``COMORMENT_REF`` pointing to the folder containing extracted ``comorment_ref.tar.gz`` data.
