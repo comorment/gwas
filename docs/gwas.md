@@ -93,3 +93,6 @@ python /tools/python_convert/manhattan.py /ref/sumstats/PGC_SCZ_2014_EUR.sumstat
 
 python /tools/python_convert/qq.py /ref/sumstats/PGC_SCZ_2014_EUR.sumstats.gz --out /data/PGC_SCZ_2014_EUR.qq.png
 ```
+Result:
+![PGC_SCZ_2014_EUR manh png](https://raw.githubusercontent.com/comorment/gwas/main/docs/PGC_SCZ_2014_EUR.manh.png)
+![PGC_SCZ_2014_EUR qq png](https://raw.githubusercontent.com/comorment/gwas/main/docs/PGC_SCZ_2014_EUR.qq.png)
