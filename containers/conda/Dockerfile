@@ -21,11 +21,12 @@ RUN conda install -n ldsc -c bioconda bitarray=0.8 nose=1.3 pybedtools=0.7 --yes
 
 RUN conda create -n py3 python=3.8 --yes
 RUN conda install -n py3 -c conda-forge jupyterlab --yes
-RUN conda install -n py3 numpy scipy pandas statsmodels matplotlib matplotlib_venn seaborn numdifftools --yes
+RUN conda install -n py3 numpy scipy pandas statsmodels matplotlib seaborn --yes
+RUN conda install -n py3 -c conda-forge matplotlib-venn numdifftools --yes
 
-RUN conda create -n Renv r-essentials r-base --yes
-RUN conda install -n Renv -c conda-forge jupyterlab --yes
-RUN conda install -n Renv -c r r-irkernel --yes
+#RUN conda create -n Renv r-essentials r-base --yes
+#RUN conda install -n Renv -c conda-forge jupyterlab --yes
+#RUN conda install -n Renv -c r r-irkernel --yes
 
 WORKDIR /tools/ldsc
 RUN git clone https://github.com/bulik/ldsc.git .

@@ -1,4 +1,4 @@
-# gwas container
+# R container
 FROM 'ubuntu:18.04'
 
 ENV TZ=Europe
@@ -10,11 +10,24 @@ COPY /scripts/apt_get_essential.sh .
 RUN chmod +x apt_get_essential.sh
 RUN bash apt_get_essential.sh
 
+# R
+WORKDIR /tmp
+COPY /scripts/install_r.sh /tmp
+RUN chmod +x install_r.sh
+RUN bash install_r.sh
+
 # Rstudio
-WORKDIR /tools/rstudio
-COPY /scripts/install_rstudio.sh /tools/rstudio
+WORKDIR /tmp
+COPY /scripts/install_rstudio.sh /tmp
 RUN chmod +x install_rstudio.sh
 RUN bash install_rstudio.sh
+
+# R packages
+RUN R -e "install.packages('rmarkdown')"
+RUN R -e "install.packages('ggplot2')"
+RUN R -e "install.packages('data.table')"
+RUN R -e "install.packages('optparse')"
+RUN R -e "install.packages('foreign')"
 
 # saige
 #WORKDIR /tools/saige
@@ -23,9 +36,9 @@ RUN bash install_rstudio.sh
 #RUN bash install_saige.sh
 
 # genomicsam
-WORKDIR /tools/genomicsam
-COPY /scripts/install_genomicsam.sh /tools/genomicsam
-RUN chmod +x install_genomicsam.sh
-RUN bash install_genomicsam.sh
+#WORKDIR /tools/genomicsam
+#COPY /scripts/install_genomicsam.sh /tools/genomicsam
+#RUN chmod +x install_genomicsam.sh
+#RUN bash install_genomicsam.sh
 
 WORKDIR /tools

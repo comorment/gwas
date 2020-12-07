@@ -5,4 +5,4 @@ rm -rf BOLT-LMM_v2.3.4.tar.gz && \
 mv BOLT-LMM_v2.3.4/* . && \
 rmdir BOLT-LMM_v2.3.4
 
-cp bolt  /bin
+echo 'export PATH="/tools/bolt:$PATH"' >>  ~/.bashrc

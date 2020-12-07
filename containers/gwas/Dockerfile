@@ -35,10 +35,10 @@ RUN chmod +x /tmp/install_plink2.sh
 RUN bash /tmp/install_plink2.sh
 
 # Bolt LMM
-#WORKDIR /tools/bolt
-#COPY /scripts/install_bolt.sh /tmp
-#RUN chmod +x /tmp/install_bolt.sh
-#RUN bash /tmp/install_bolt.sh
+WORKDIR /tools/bolt
+COPY /scripts/install_bolt.sh /tmp
+RUN chmod +x /tmp/install_bolt.sh
+RUN bash /tmp/install_bolt.sh
 
 # gcta
 #WORKDIR /tools/gcta

@@ -1,7 +1,11 @@
 #!/bin/sh
-apt-get update && apt-get install -y r-base &&  apt-get install -y r-cran-ggplot2  &&  apt-get install -y  r-cran-data.table &&  apt-get install -y r-cran-optparse && apt-get install -y  libnss3
+apt-get update
+apt-get install -y git make cmake build-essential gfortran
+apt-get install -y libxt-dev libpcre2-dev zlib1g-dev libcurl4 libcurl4-openssl-dev 
+apt-get install -y r-base libnss3 pandoc pandoc-citeproc
 
-# Rmarkdown
-apt-get install -y pandoc &&  apt-get install -y pandoc-citeproc
-R -e "install.packages('rmarkdown')"
-
+# build R from source
+wget https://cran.r-project.org/src/base/R-4/R-4.0.3.tar.gz && tar -xvzf R-4.0.3.tar.gz && cd R-4.0.3
+./configure
+make -j6
+make install
