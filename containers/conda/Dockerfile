@@ -28,6 +28,12 @@ RUN conda install -n py3 -c conda-forge matplotlib-venn numdifftools --yes
 #RUN conda install -n Renv -c conda-forge jupyterlab --yes
 #RUN conda install -n Renv -c r r-irkernel --yes
 
+# Plink (as python_convert depends on plink)
+WORKDIR /tools/plink
+COPY /scripts/install_plink.sh /tmp
+RUN chmod +x /tmp/install_plink.sh
+RUN bash /tmp/install_plink.sh
+
 WORKDIR /tools/ldsc
 RUN git clone https://github.com/bulik/ldsc.git .
 
