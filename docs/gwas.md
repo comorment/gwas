@@ -91,5 +91,5 @@ python /tools/python_convert/manhattan.py /ref/sumstats/PGC_SCZ_2014_EUR.sumstat
   --indep /data/PGC_SCZ_2014_EUR.clump.indep.csv \
   --out /data/PGC_SCZ_2014_EUR.manh 
 
-python /tools/python_convert/qq.py /ref/sumstats/PGC_SCZ_2014_EUR.sumstats.gz --out /data/PGC_SCZ_2014.qq.png
+python /tools/python_convert/qq.py /ref/sumstats/PGC_SCZ_2014_EUR.sumstats.gz --out /data/PGC_SCZ_2014_EUR.qq.png
 ```
