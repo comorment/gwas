@@ -94,5 +94,15 @@ python /tools/python_convert/manhattan.py /ref/sumstats/PGC_SCZ_2014_EUR.sumstat
 python /tools/python_convert/qq.py /ref/sumstats/PGC_SCZ_2014_EUR.sumstats.gz --out /data/PGC_SCZ_2014_EUR.qq.png
 ```
 Result:
+```
+$head PGC_SCZ_2014_EUR.clump.loci.csv
+locusnum	CHR	LEAD_SNP	LEAD_BP	MinBP	MaxBP	PVAL
+1	1	rs4648845	2387101	2369498	2402499	1.737e-08
+2	1	rs301797	8487323	8404093	8701288	1.202e-08
+3	1	rs1498232	30433951	30412503	30437118	1.206e-09
+4	1	rs11210892	44100084	44029353	44137257	3.417e-09
+5	1	rs35998080	73278615	73275828	74033340	6.953e-10
+...
+```
 ![PGC_SCZ_2014_EUR manh png](https://raw.githubusercontent.com/comorment/gwas/main/docs/PGC_SCZ_2014_EUR.manh.png)
 ![PGC_SCZ_2014_EUR qq png](https://raw.githubusercontent.com/comorment/gwas/main/docs/PGC_SCZ_2014_EUR.qq.png)
