@@ -3,10 +3,9 @@
 
 # metal
 
-wget  http://csg.sph.umich.edu/abecasis/metal/download/Linux-metal.tar.gz && \
+wget --no-check-certificate http://csg.sph.umich.edu/abecasis/metal/download/Linux-metal.tar.gz && \
    tar -xvzf Linux-metal.tar.gz && \
    rm -rf  Linux-metal.tar.gz
 
-
-
-   cp generic-metal/metal  /bin
+mv generic-metal/* .
+cp metal  /bin

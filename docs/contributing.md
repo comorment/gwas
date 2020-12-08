@@ -29,7 +29,7 @@ The script works by creating a local Docker repostiory:
 singularity/from_docker_image.sh hello
 singularity/from_docker_image.sh gwas
 singularity/from_docker_image.sh conda
-singularity/from_docker_image.sh R
+singularity/from_docker_image.sh r
 ```
 
 # Running docker containers (misc commands)
