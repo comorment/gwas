@@ -34,6 +34,12 @@ COPY /scripts/install_plink2.sh /tmp
 RUN chmod +x /tmp/install_plink2.sh
 RUN bash /tmp/install_plink2.sh
 
+# plink2-avx2
+WORKDIR /tools/plink2_avx2
+COPY /scripts/install_plink2_avx2.sh /tmp
+RUN chmod +x /tmp/install_plink2_avx2.sh
+RUN bash /tmp/install_plink2_avx2.sh
+
 # Bolt LMM
 WORKDIR /tools/bolt
 COPY /scripts/install_bolt.sh /tmp
@@ -81,6 +87,5 @@ WORKDIR /tools
 COPY /scripts/install_bcftools.sh /tmp
 RUN chmod +x /tmp/install_bcftools.sh
 RUN bash /tmp/install_bcftools.sh
-
 
 WORKDIR /tools
