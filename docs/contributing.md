@@ -18,7 +18,8 @@ The following commands assume that current directory is at the root the ``gwas``
 ```
 docker build -t hello -f containers/hello/Dockerfile .
 docker build -t gwas  -f containers/gwas/Dockerfile .
-docker build -t conda -f containers/conda/Dockerfile .
+docker build -t python3 -f containers/python3/Dockerfile .
+docker build -t ldsc  -f containers/ldsc/Dockerfile .
 docker build -t r     -f containers/R/Dockerfile .
 ```
 
@@ -28,7 +29,8 @@ The script works by creating a local Docker repostiory:
 ```
 singularity/from_docker_image.sh hello
 singularity/from_docker_image.sh gwas
-singularity/from_docker_image.sh conda
+singularity/from_docker_image.sh python3
+singularity/from_docker_image.sh ldsc
 singularity/from_docker_image.sh r
 ```
 
@@ -43,5 +45,5 @@ docker run -it -v $COMORMENT_REF:/ref demo
 
 ```
 singularity shell --no-home -B $(pwd):/data demo.sif
-singularity shell --no-home -B $(pwd):/data conda.sif
+singularity shell --no-home -B $(pwd):/data python3.sif
 ```

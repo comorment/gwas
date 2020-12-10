@@ -15,8 +15,7 @@ singularity shell --no-home -B $GENO:/geno -B $PHENO:/pheno -B $OUT:/out gwas.si
 for CHRI in {1..22}; do echo "plink2 --bed /geno/chr$CHRI.step10.imputed.bed --bim /geno/chr$CHRI.step10.imputed.bim --fam /geno/chr$CHRI.step10.fam --glm hide-covar --pheno /pheno/${BATCH}_height.pheno --pheno-name Height --covar /pheno/$BATCH.asfactor.cov  --covar-name SEX BATCH1-BATCH$LASTBATCH Age PC1-PC20 --covar-variance-standardize  --out /out/${BATCH}.chr$CHRI --maf 0.05"; done | bash
 
 # combine results across chromosomes
-singularity shell --no-home -B $OUT:/out -B $REF:/ref conda.sif
-source activate py3
+singularity shell --no-home -B $OUT:/out -B $REF:/ref python3.sif
 
 python
 import os, glob, pandas as pd
@@ -24,8 +23,7 @@ df=pd.concat([pd.read_csv(x, delim_whitespace=True) for x in glob.glob('/out/{}.
 df.to_csv('/out/{}.Height.glm.linear'.format(os.getenv('BATCH')), index=False, sep='\t')
 
 # make QQ plots, find loci, make Manhattan plots.
-singularity shell --no-home -B $OUT:/out -B $REF:/ref conda.sif
-source activate py3
+singularity shell --no-home -B $OUT:/out -B $REF:/ref python3.sif
 
 python /tools/python_convert/qq.py /out/$BATCH.Height.glm.linear --p P --snp ID  --out /out/$BATCH.Height.glm.linear.png
 

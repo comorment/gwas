@@ -18,7 +18,8 @@ For a tutorial on GWAS with synthetic data, see [docs/gwas.md](docs/gwas.md).
 ## Description of available containers:
 * ``hello`` - a hello-world introductory container
 * ``gwas`` - basic tools for gwas (``plink``, ``plink2``, ``prsice``, ``BoltLMM``)
-* ``conda`` - python packages distributed via miniconda. This package also contains jupyter notebook, and LD score regression.
+* ``python3`` - python3 packages distributed via miniconda. This package also contains jupyter notebook.
+* ``ldsc`` - LD score regression
 * ``matlab`` - container allowing to run pre-compiled MATLAB software. This container also has OCTAVE installed.
 * ``R`` - contaienr for R analysis (installed by native R package manager)
 

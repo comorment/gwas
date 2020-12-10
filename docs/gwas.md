@@ -8,10 +8,9 @@ simu_linux --bfile /ref/hapgen/chr21 --qt --causal-n 100 --out /data/simu
 plink2 --bfile /ref/hapgen/chr21 --glm allow-no-covars --pheno /data/simu.pheno --pheno-name trait1 --out /data/plink
 ```
 
-Start ``conda.sif`` container, activate ``py3`` encironment, and generate QQ plot and Manhattan plots.
+Start ``python3.sif`` container, and generate QQ plot and Manhattan plots.
 ```
-singularity shell --no-home -B $COMORMENT_REF:/ref -B data:/data conda.sif
-source activate py3
+singularity shell --no-home -B $COMORMENT_REF:/ref -B data:/data python3.sif
 python /tools/python_convert/qq.py /data/plink.trait1.glm.linear --p P --snp ID  --out /data/plink.trait1.glm.linear.qq.png
 python /tools/python_convert/manhattan.py /data/plink.trait1.glm.linear --p P --snp ID --bp POS --chr "#CHROM" --out /data/plink.trait1.glm.linear.manh
 ```
@@ -47,10 +46,9 @@ Pheno   Set     Threshold       R2      P       Coefficient     Standard.Error  
 
 ## Tutorial for running LD score regression
 
-Start ``conda.sif`` container, activate ``ldsc`` environment:
+Start ``ldsc.sif`` container:
 ```
-singularity shell --no-home -B $COMORMENT_REF:/ref -B data:/data conda.sif
-source activate ldsc
+singularity shell --no-home -B $COMORMENT_REF:/ref -B data:/data ldsc.sif
 ```
 
 Pre-process summary statistics with ``munge_sumstats.py`` script:
@@ -78,8 +76,7 @@ p1                              p2      rg      se        z            p  h2_obs
 ## Tutorial for making manhattan and QQ plots:
 
 ```
-singularity shell --no-home -B $COMORMENT_REF:/ref -B data:/data conda.sif
-source activate py3
+singularity shell --no-home -B $COMORMENT_REF:/ref -B data:/data python3.sif
 
 python /tools/python_convert/sumstats.py clump \
   --sumstats /ref/sumstats/PGC_SCZ_2014_EUR.sumstats.gz \
