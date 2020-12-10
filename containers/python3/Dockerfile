@@ -11,10 +11,11 @@ RUN chmod +x apt_get_essential.sh
 RUN bash apt_get_essential.sh
 
 WORKDIR /tmp
-COPY /scripts/miniconda.sh .
-RUN chmod +x miniconda.sh
-RUN bash miniconda.sh
+COPY /scripts/install_miniconda3.sh .
+RUN chmod +x install_miniconda3.sh
+RUN bash install_miniconda3.sh
 
+RUN conda install python=3.8 --yes
 RUN conda install -c conda-forge jupyterlab --yes
 RUN conda install numpy scipy pandas statsmodels matplotlib seaborn --yes
 RUN conda install -c conda-forge matplotlib-venn numdifftools --yes

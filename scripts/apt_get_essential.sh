@@ -7,6 +7,7 @@ apt-get update && apt-get install -y  --no-install-recommends apt-utils \
    build-essential \
    bzip2 \
    cmake \
+   curl \
    dos2unix \
    gfortran \
    git \

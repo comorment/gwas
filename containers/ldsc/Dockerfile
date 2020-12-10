@@ -11,11 +11,11 @@ RUN chmod +x apt_get_essential.sh
 RUN bash apt_get_essential.sh
 
 WORKDIR /tmp
-COPY /scripts/miniconda.sh .
-RUN chmod +x miniconda.sh
-RUN bash miniconda.sh
+COPY /scripts/install_miniconda.sh .
+RUN chmod +x install_miniconda.sh
+RUN bash install_miniconda.sh
 
-RUN conda create python=2.7 --yes
+RUN conda install python=2.7 --yes
 RUN conda install numpy=1.16 pandas=0.20 scipy --yes
 RUN conda install -c bioconda bitarray=0.8 nose=1.3 pybedtools=0.7 --yes
 

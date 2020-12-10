@@ -19,7 +19,7 @@ RUN bash miniconda.sh
 # ``library(data.table)`` command crashes with the following error:
 # unable to load shared object '/usr/local/envs/Renv/lib/R/library/grDevices/libs//cairo.so'
 
-RUN conda create r-essentials r-base --yes
+RUN conda install r-essentials r-base --yes
 RUN conda install -c conda-forge jupyterlab --yes
 RUN conda install -c r r-irkernel --yes
 
