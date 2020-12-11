@@ -15,9 +15,14 @@ COPY /scripts/install_miniconda.sh .
 RUN chmod +x install_miniconda.sh
 RUN bash install_miniconda.sh
 
-RUN conda install python=2.7 --yes
-RUN conda install numpy=1.16 pandas=0.20 scipy --yes
-RUN conda install -c bioconda bitarray=0.8 nose=1.3 pybedtools=0.7 --yes
+RUN conda install python=2.7.13
+RUN pip install argparse==1.3.0
+RUN pip install bitarray==0.8.1
+RUN pip install nose==1.3.4
+RUN pip install numpy==1.8.0
+RUN pip install pandas==0.17.0
+RUN pip install scipy==0.11.0
+RUN pip install pybedtools==0.7
 
 WORKDIR /tools/ldsc
 RUN git clone https://github.com/bulik/ldsc.git .

@@ -55,7 +55,9 @@ Pre-process summary statistics with ``munge_sumstats.py`` script:
 TBD: investigate why these commands were so slow...
 ```
 python /tools/ldsc/munge_sumstats.py --merge-alleles /ref/ldsc/w_hm3.snplist --sumstats /ref/sumstats/PGC_BIP_2016.sumstats.gz --out /data/PGC_BIP_2016 --signed-sumstats Z,0
+mv /data/PGC_BIP_2016.sumstats.gz /data/PGC_BIP_2016.sumstats && gzip /data/PGC_BIP_2016.sumstats   # hack-hack, ldsc produces .gz files which aren't actually compressed
 python /tools/ldsc/munge_sumstats.py --merge-alleles /ref/ldsc/w_hm3.snplist --sumstats /ref/sumstats/PGC_SCZ_2014_EUR.sumstats.gz --out /data/PGC_SCZ_2014_EUR --signed-sumstats Z,0
+mv /data/PGC_SCZ_2014_EUR.sumstats.gz /data/PGC_SCZ_2014_EUR.sumstats && gzip /data/PGC_SCZ_2014_EUR.sumstats
 ```
 
 Calculate genetic correlation:
