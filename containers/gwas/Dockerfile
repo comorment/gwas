@@ -88,4 +88,10 @@ COPY /scripts/install_bcftools.sh /tmp
 RUN chmod +x /tmp/install_bcftools.sh
 RUN bash /tmp/install_bcftools.sh
 
+# flashpca
+WORKDIR /tools/flashpca
+COPY /scripts/install_flashpca.sh /tmp
+RUN chmod +x /tmp/install_flashpca.sh
+RUN bash /tmp/install_flashpca.sh
+
 WORKDIR /tools
