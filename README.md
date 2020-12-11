@@ -12,6 +12,9 @@ For a tutorial on GWAS with synthetic data, see [docs/gwas.md](docs/gwas.md).
 * download containers shared on the [Google Drive](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing).
 * download ``comorment_ref.tar.gz`` file from the above Google Drive folder, extract it with ``tar -xzvf comorment_ref.tar.gz`` command,
   and create an environmental variable ``COMORMENT_REF`` pointing to the folder containing extracted ``comorment_ref.tar.gz`` data.
+  If you want to see the content of ``comorment_ref.tar.gz`` without downloading and extracting, 
+  you may take a quick look [here](https://github.com/norment/comorment_data). This is a private repository, and you need to get access.
+  Please contact Oleksandr and Bayram by e-mail and send us your github user name. If you don't have it, create one [here](http://github.com/join).
 * create an empty folder called ``data``, for storing the results and intermediate files produced by running containers.
   (most instructinos mount this folder like this: ``-B data:/data``).
 
