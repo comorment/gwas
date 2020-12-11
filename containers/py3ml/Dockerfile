@@ -1,5 +1,4 @@
-# gwas container
-FROM 'ubuntu:18.04'
+FROM nvidia/cuda:10.2-base
 
 ENV TZ=Europe
 ENV DEBIAN_FRONTEND noninteractive
