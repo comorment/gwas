@@ -11,6 +11,13 @@ Note that this repository has ``git lfs`` support enabled.
   Note that ``sudo apt-get`` can give only a very old version of singularity, which isn't sufficient.
   Therefore it's best to build singularity locally.  Note that singularity depends on GO, so it must be installed first.
 
+# Building everything
+
+There is a ``Makefile`` script in the root of the repo. To build all containers, run ``sudo make``
+(or just ``make`` - it might be that you Docker & singularity are installed in a way that don't require sudo).
+Makefile builds conatiner ``xxx`` only if it's ``xxx.sif`` file is missing, or is older that ``containers/xxx/Dockerfile``.
+You may ``touch containers/xxx/Dockerfile`` if you want to force the build, i.e.  in case if one of the scripts has changed.
+
 # Building docker images
 
 Clone from http://github.com/comorment/gwas.

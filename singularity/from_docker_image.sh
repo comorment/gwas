@@ -31,7 +31,7 @@ Namespace:
 From: $1:latest
 EOI
 # build singularity image
-sudo SINGULARITY_NOHTTPS=1 singularity build $1.sif "$TMPFILE"
+sudo SINGULARITY_NOHTTPS=1 singularity build --force $1.sif "$TMPFILE"
 
 # remove temp file
 rm -f "$TMPFILE"
