@@ -16,7 +16,8 @@ Note that this repository has ``git lfs`` support enabled.
 There is a ``Makefile`` script in the root of the repo. To build all containers, run ``sudo make``
 (or just ``make`` - it might be that you Docker & singularity are installed in a way that don't require sudo).
 Makefile builds conatiner ``xxx`` only if it's ``xxx.sif`` file is missing, or is older that ``containers/xxx/Dockerfile``.
-You may ``touch containers/xxx/Dockerfile`` if you want to force the build, i.e.  in case if one of the scripts has changed.
+You may ``touch containers/xxx/Dockerfile`` if you want to force the build 
+(e.g. in case if one of the ``install_xxx.sh`` files has changed in the ``scripts`` folder - such dependency won't be handled by the Makefile).
 
 # Building docker images
 
