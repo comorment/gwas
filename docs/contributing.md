@@ -55,3 +55,6 @@ docker run -it -v $COMORMENT_REF:/ref demo
 singularity shell --no-home -B $(pwd):/data demo.sif
 singularity shell --no-home -B $(pwd):/data python3.sif
 ```
+
+# misc
+Docker quickly consumes a lot of disc space. Use ``sudo docker system df`` to check current usage, and ``sudo docker system prune -a`` to clean up.
