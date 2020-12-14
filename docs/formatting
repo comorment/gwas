@@ -1,4 +1,4 @@
-## Tutorial for Data Format Conversion
+# Tutorial for Data Format Conversion
 
 This is a tutorial on how to convert one genetic format to another(such as .bed, .vcf, .bgen, .bcf). For this aim plink2, vcftools and qctool are used.
 
