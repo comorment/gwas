@@ -1,6 +1,6 @@
-## Tutorial for analyzing Relatedness on synthetic dataset
+## Tutorial for analyzing relatedness and heritability on synthetic dataset
 
-Start ``gwas.sif`` container, generate synthetic phenotype with 100 causal genetic variants, and run GCTA (gcta64) to compute relatedness. 
+Start ``gwas.sif`` container, generate synthetic phenotype with 100 causal genetic variants, and run GCTA (gcta64) to compute relatedness and heritability. 
 
 This is a demo using synthetic genotypes (10K subjects, 150K SNPs), produced by HapGen2 tool.
 
