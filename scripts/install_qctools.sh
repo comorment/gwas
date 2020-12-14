@@ -10,3 +10,5 @@
 
 mv qctool_v2.0.6-Ubuntu16.04-x86_64/* .
 cp qctool  /bin
+
+chmod 755 /bin/qctool
