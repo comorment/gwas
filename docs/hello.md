@@ -33,3 +33,13 @@ and will shortly make this available here: https://github.com/comorment/gwas .
   ```
 
 Please [let us know](https://github.com/comorment/gwas/issues/new) if you face any problems.
+
+## TSD-specific instructions
+
+The official documentation fro singularity on TSD  is available [here](https://www.uio.no/english/services/it/research/sensitive-data/use-tsd/hpc/software/singularity.html). Here are more important notes about singularity on TSD:
+* ``module load singularity/2.6.1`` is going to be deprecated soon; instead, there will be a local installation of singularity on each Colossus node
+* Singularity might be unavailable on some of the interactive nodes. For example, in ``p33`` project it is recommended to run singularity on ``p33-appn-norment01`` node. You may also find it in ``p33-submit`` nodes. 
+* You may want to run ``module purge``, to make sure you use locally installed singularity. It is good idea to run ``which singularity`` to validate this.
+* Use ``singularity --version`` to find the version of singularity
+* Generally, it is a good idea to add ``--no-home`` argument to your singularity commands, to make sure that that scripts such as ``.bashrc`` do not interfere with singularity container. This also applies if you have custom software installed in your home folder. For other options that control isolation of the containers (i.e. ``--containall`` option) see [here](https://sylabs.io/guides/3.1/user-guide/bind_paths_and_mounts.html#using-no-home-and-containall-flags). 
+* If you are a developer, and you would like to generate a singularity container, you may want to do it outside of TSD, and then bring just a ``.sif`` file to TSD. Also, building singularity containers is much easier by building a Docker container first (using ``Dockerfile``), and converting such Docker container to a singularity container.
