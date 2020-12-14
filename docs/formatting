@@ -10,3 +10,4 @@ vcftools --vcf  /data/chr1_vcf.vcf  --recode-bcf --recode-INFO-all --out data/ch
 
 
 
+
