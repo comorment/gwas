@@ -48,7 +48,6 @@ singularity/from_docker_image.sh r
 docker run -it r
 docker run -it -v $COMORMENT_REF:/ref demo 
 ```
-
 # Running singularity containers (misc commands)
 
 ```
@@ -58,3 +57,9 @@ singularity shell --no-home -B $(pwd):/data python3.sif
 
 # misc
 Docker quickly consumes a lot of disc space. Use ``sudo docker system df`` to check current usage, and ``sudo docker system prune -a`` to clean up.
+
+
+# Issues with internet inside Docker containers
+
+This was useful:
+https://stackoverflow.com/questions/20430371/my-docker-container-has-no-internet
