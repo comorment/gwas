@@ -7,12 +7,12 @@ The following procedure is repeated twice - first time for the HCE batch, second
 export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/HCE; export BATCH=hce; LASTBATCH=2;    # for hce batch
 export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/OMNI; export BATCH=omni; LASTBATCH=3;  # for omni batch
 export PHENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/data
-export OUT=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/out
+export OUT=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/out   # OUT directory should be your own custom output directory ( hence do not copy paste it)
 export REF=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/ref
 
 # perform GWAS
 singularity shell --no-home -B $GENO:/geno -B $PHENO:/pheno -B $OUT:/out gwas.sif
-for CHRI in {1..22}; do echo "plink2 --bed /geno/chr$CHRI.step10.imputed.bed --bim /geno/chr$CHRI.step10.imputed.bim --fam /geno/chr$CHRI.step10.fam --glm hide-covar --pheno /pheno/${BATCH}_height.pheno --pheno-name Height --covar /pheno/$BATCH.asfactor.cov  --covar-name SEX BATCH1-BATCH$LASTBATCH Age PC1-PC20 --covar-variance-standardize  --out /out/${BATCH}.chr$CHRI --maf 0.05"; done | bash
+for CHRI in {1..22}; do echo "plink2 --bed /geno/chr$CHRI.step10.imputed.bed --bim /geno/chr$CHRI.step10.imputed.bim --fam /geno/chr$CHRI.step10.fam --glm hide-covar --pheno /pheno/${BATCH}_height.pheno --pheno-name Height --covar /pheno/$BATCH.asfactor.cov  --covar-name SEX BATCH-BATCH1$LASTBATCH Age PC1-PC20 --covar-variance-standardize  --out /out/${BATCH}.chr$CHRI --maf 0.05"; done | bash
 
 # combine results across chromosomes
 singularity shell --no-home -B $OUT:/out -B $REF:/ref python3.sif
@@ -37,6 +37,6 @@ python /tools/python_convert/manhattan.py /out/$BATCH.Height.glm.linear --p P --
   --indep /out/$BATCH.Height.clump.indep.csv \
 
 # TBD - run LD score regression
-source activate ldsc
+singularity shell --no-home -B $OUT:/out -B $REF:/ref ldsc.sif
 python /tools/ldsc/munge_sumstats.py --merge-alleles /ref/ldsc/w_hm3.snplist --sumstats /out/hce.Height.glm.linear --out /out/hce.Height.sumstats.gz --signed-sumstats T_STAT,0 --N-col OBS_CT --ignore A1 --a1 REF --a2 ALT  --snp ID
 ```
