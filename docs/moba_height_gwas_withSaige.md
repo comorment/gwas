@@ -1,3 +1,6 @@
+This document describes a preliminary analysis of Height GWAS in two genotype batches of the MoBa study (HCE batch, and OMNI batch). Each GWAS include 13500 subjects (after QC and constraining on individual having phenotypic values and all covariates).
+
+The following procedure is repeated twice - first time for the HCE batch, second time for the OMNI batch.
 
 ```
 
