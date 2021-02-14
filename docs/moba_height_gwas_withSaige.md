@@ -1,8 +1,12 @@
+
+```
+
 export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/HCE; export BATCH=hce; LASTBATCH=2;    # for hce batch
 #export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/OMNI; export BATCH=omni; LASTBATCH=3;  # for omni batch
 export PHENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/data
 export OUT=$PWD/outsaige   # OUT directory should be your own custom output directory ( hence do not copy paste it)
 export REF=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/ref
+
 
 
 # combine pheno and covariates
@@ -108,3 +112,7 @@ python /tools/python_convert/sumstats.py clump \
 python /tools/python_convert/manhattan.py /out/$BATCH.chr.All.linear --p p.value --snp SNPID --bp POS --chr "CHR" --out /out/$BATCH.Height.glm.linear.manh \
 --lead /out/$BATCH.Height.clump.lead.csv \
 --indep /out/$BATCH.Height.clump.indep.csv
+
+
+
+```
