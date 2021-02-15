@@ -17,7 +17,7 @@ At this stage we only work with hard-call data, not dosage data. Support for dos
    
 ### Phenotypes and covariates
 
-For phenotypes and covariates, we expect the data to be organized in a single tab-separated file (hereinafter referred to as *phenotype file*), 
+For phenotypes and covariates, we expect the data to be organized in a single comma-separated file (hereinafter referred to as *phenotype file*), 
 with rows corresponding to individuals, and columns corresponding to relevant variables of interest or covariates.
 We expect a single phenotype file (at each site), not split by the genotype cohorts.
 The phenotype file must include a subject ID column, containing identifiers that matches the ID in genetic data (i.e. the ``IID`` column in plink files).
@@ -28,18 +28,19 @@ Phenotype file should be accompanied by a *data dictionary* file,
 which define whether each variable is a binary (case/control), nominal (a discrete set of values) or continuous.
 The data dictionary should be a file with two columns, one row per variable (listed in the first column), with secon column having values *BINARY*, *NOMINAL*, *CONTINUOUS* or *ID*.     
 
-Example:
+Example ``MoBa.pheno`` file:
 ```
-MoBa.pheno
-ID MDD PC1 PC2 PC3
-1  0   0.1 0.2 0.3
-2  1   0.4 0.5 0.6
-3  0   0.6 0.7 0.8
+ID,MDD,PC1,PC2,PC3
+1,0,0.1,0.2,0.3
+2,1,0.4,0.5,0.6
+3,0,0.6,0.7,0.8
+```
 
-MoBa.dict
-ID  ID
-MDD BINARY
-PC1 CONTINUOUS
-PC2 CONTINUOUS
-PC3 CONTINUOUS
+Example ``MoBa.dict`` file:
+```
+ID,ID
+MDD,BINARY
+PC1,CONTINUOUS
+PC2,CONTINUOUS
+PC3,CONTINUOUS
 ```
