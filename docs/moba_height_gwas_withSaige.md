@@ -1,3 +1,5 @@
+```
+
 export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/HCE; export BATCH=hce; LASTBATCH=2;    # for hce batch
 #export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/OMNI; export BATCH=omni; LASTBATCH=3;  # for omni batch
 export PHENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/data
@@ -121,3 +123,5 @@ python /tools/ldsc/ldsc.py \
 --w-ld-chr ref/eur_w_ld_chr/ \
 --out hce_omni_height
 
+
+```
