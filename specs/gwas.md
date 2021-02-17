@@ -43,26 +43,33 @@ We expect a single phenotype file and a single data dictionary file for each coh
 <BASEPATH>/<COHORT>/pheno.csv
 <BASEPATH>/<COHORT>/pheno.dict
 ```
-Off note: when we ru GWAS on a given cohort, we use subjects that has both genetic and phenotype data available, thus it's fine to include other subjects in the phenotype. If you have sub-cohorts of the same study, it is OK to re-use one phenotype file containing information for all sub-cohorts, as long all subjects have a unique ID across cohorts. 
+Off note: when we run GWAS analysis on a given cohort, we use subjects that has both genetic and phenotype data available, 
+thus it's fine to include subjects without genetic data in the phenotype file.
+If you have sub-cohorts of the same study, it is OK to re-use one phenotype file containing information for all sub-cohorts,
+as long all subjects have a unique IID across cohorts. 
 
-The phenotype file must include a subject ID column, containing identifiers that matches the ID in genetic data (i.e. the ``IID`` column in plink ``.fam`` files).
-The file must contain all covariates needed for GWAS analysis, including age, sex, principal genetic components, and other confounters such as genetic batch or plate, if needed. Column names in the phenotype file must be unique. It is OK to include other relevant columns in the phenotype file - a GWAS analysis can be customized to use a subset of columns, as well as a subset of subjects.
+The phenotype file must include a subject IID column, containing identifiers that matches the IID in genetic data
+(i.e. the ``IID`` column in plink ``.fam`` files).
+The file must contain all covariates needed for GWAS analysis, including age, sex, principal genetic components, 
+and other confounters such as genetic batch or plate, if needed. Column names in the phenotype file must be unique. 
+It is OK to include other relevant columns in the phenotype file - a GWAS analysis can be customized to use a subset of columns, 
+as well as a subset of subjects.
 
 Missing values should be encoded by empty string (see example below).
 It is allowed to use ``#`` to comment out first lines.
-Columns required in phenotype file: ``ID`` and ``SEX``.
+Columns required in phenotype file: ``IID`` and ``SEX`` (note that use of ``IID``, not ``ID``, to match plink nomenclature).
 
 Phenotype file should be accompanied by a *data dictionary* file, 
 which define whether each variable is a binary (case/control), nominal (a discrete set of values) or continuous.
 The data dictionary should be a file with two columns, one row per variable (listed in the first column),
-with second column having values *BINARY*, *NOMINAL*, *CONTINUOUS* or *ID*.
+with second column having values *BINARY*, *NOMINAL*, *CONTINUOUS* or *IID*.
 The file may have other optional columns, i.e. description of each variable.
 The file should have column names, first two columns must have names ``COLUMN`` and ``TYPE``.
 
-Example ``MoBa/pheno.csv`` file. Subject ``ID=3`` have missing values for ``SEX`` and ``MDD``.
+Example ``MoBa/pheno.csv`` file. Subject ``IID=3`` have missing values for ``SEX`` and ``MDD``.
 ```
 # optional comments or description
-ID,SEX,MDD,PC1,PC2,PC3
+IID,SEX,MDD,PC1,PC2,PC3
 1,M,0,0.1,0.2,0.3
 2,F,1,0.4,0.5,0.6
 3,,,0.6,0.7,0.8
@@ -73,7 +80,7 @@ ID,SEX,MDD,PC1,PC2,PC3
 Example ``MoBa/pheno.dict`` file:
 ```
 COLUMN,TYPE,DESCRIPTION
-ID,ID,Identifier
+IID,IID,Identifier
 SEX,NOMINAL,Sex (M - male, F - female)
 MDD,BINARY,Major depression diagnosis
 PC1,CONTINUOUS,First principal component
