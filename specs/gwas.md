@@ -62,9 +62,14 @@ Columns required in phenotype file: ``IID`` and ``SEX`` (note that use of ``IID`
 Phenotype file should be accompanied by a *data dictionary* file, 
 which define whether each variable is a binary (case/control), nominal (a discrete set of values) or continuous.
 The data dictionary should be a file with two columns, one row per variable (listed in the first column),
-with second column having values *BINARY*, *NOMINAL*, *CONTINUOUS* or *IID*.
+with second column having values *BINARY*, *NOMINAL*, *ORDINAL*, *CONTINUOUS* or *IID*.
 The file may have other optional columns, i.e. description of each variable.
 The file should have column names, first two columns must have names ``COLUMN`` and ``TYPE``.
+
+The purpose of the ``pheno.dict`` file is to allow scripts to choose correct analysis:
+for example, if target variable is continous, we can run GWAS with linear regression mode,
+while if target variable is binary, we will run logistic regression;
+similarly, if a nominal variable is used as covariate, then it will be included as factor.
 
 Example ``MoBa/pheno.csv`` file. Subject ``IID=3`` have missing values for ``SEX`` and ``MDD``.
 ```
@@ -88,3 +93,4 @@ PC2,CONTINUOUS,2nd principal component
 PC3,CONTINUOUS,3rd principal component
 ...
 ```
+
