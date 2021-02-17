@@ -28,7 +28,8 @@ We also recommend to set the data as **read-only** using ``chmod 0444 $BASEPATH/
 
 Many analyses use only plink files.
 However, dosage files are required for some analysis, for example SAIGE.
-For each analysis you need to provide dosage data in a compatible format.
+For each analysis you need to provide dosage data in a compatible format
+(but we will provide a set of scripts or examples to help converting data between different formats).
 For example, SAIG recognize either compressed ``.vcf.gz`` files (with corresponding ``.vcf.gz.tbi`` index),
 or ``.bgen / .sample`` formats.
 For ``.vcf.gz``, please note that they should be compressed with ``bgzip`` ([see here](https://www.biostars.org/p/59492/))
