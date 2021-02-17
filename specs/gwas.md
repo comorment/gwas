@@ -3,44 +3,81 @@ Current description is work in progress. Please let us know, any feedback is ver
 
 ### Genotypes
  
-We expect imputed genotype data, potentially split into multiple cohorts at each site.
+We expect imputed genotype data, which may be split into multiple *cohorts* at each site.
 For example, MoBa imputed genotype data is currently split into three cohorts, one per genotype array: GSA, OMNI and HCE.
+In this context, a *cohort* is a unit of GWAS analysis, and we do not make distinction between studies (i.e. TOP, DemGENE, HUNT, MoBa),
+and sub-cohorts within each study.
+If you have multiple studies, each with a set of sub-cohorts,
+we suggest to organize it into folders as follows ``<STUDY>_<COHORT>``
+(for example, ``MOBA_GSA``, ``MOBA_OMNI``, ``MOBA_HCE``, ``TOP``, ``DemGENE``, ``HUNT``).
+
 We expect the data to be in plink format (.bed/.bim.fam), split per chromosomes, organized for example as follows:
 ```
-<BASEPATH>/<COHORT>/chr@.[bed,bim,fam]   # where @ indicates chr label
+<BASEPATH>/<COHORT>/chr@.[bed,bim,fam]   # hard calls in plink format (@ indicates chr label)
+<BASEPATH>/<COHORT>/chr@.vcf             # dosages, either in .vcf or .bgen format
+<BASEPATH>/<COHORT>/chr@.[bgen,sample]
 ```
 It is recommended (but not required) that all genetic data within cohort is placed into it's own folder.
 A strict requirement is that within each cohort the files are only different by chromosome label, so it is possible
 to specify them by a single prefix with ``@`` symbol indicating the location of a chromosome label.
+If your data is organized differently, we recommend to use 
+[symbolic links](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux),
+rather than making a full copy of the data.
+We also recommend to set the data as **read-only** using ``chmod 0444 $BASEPATH/$COHORT/chr*`` command.
 
-At this stage we only work with hard-call data, not dosage data. Support for dosage data  will came at later stage.
+In the ``.fam`` files, we require ``IID`` column to be globally unique (not just unique within families).
+Currently there is no need to provide family annotations, sex information, or phenotype information in ``.fam`` files,
+this information is currently not used in the downstream analysis.
+In the future we will consider adding a separate file to add pedigree information,
+to accomodate more complex family structures than what is feasible with ``.fam`` file.
+
+Currently we do not require ``IID`` values to be unique across cohorts.
    
 ### Phenotypes and covariates
 
 For phenotypes and covariates, we expect the data to be organized in a single comma-separated file (hereinafter referred to as *phenotype file*), 
 with rows corresponding to individuals, and columns corresponding to relevant variables of interest or covariates.
-We expect a single phenotype file (at each site), not split by the genotype cohorts.
-The phenotype file must include a subject ID column, containing identifiers that matches the ID in genetic data (i.e. the ``IID`` column in plink files).
-The file must contain all covariates needed for GWAS analysis, including principal genetic components.
-Column names in the phenotype file must be unique.
+Phenotype file should be accompanied by a *data dictionary* file, as described below.
+We expect a single phenotype file and a single data dictionary file for each cohort:
+```
+<BASEPATH>/<COHORT>/pheno.csv
+<BASEPATH>/<COHORT>/pheno.dict
+```
+Off note: when we ru GWAS on a given cohort, we use subjects that has both genetic and phenotype data available, thus it's fine to include other subjects in the phenotype. If you have sub-cohorts of the same study, it is OK to re-use one phenotype file containing information for all sub-cohorts, as long all subjects have a unique ID across cohorts. 
+
+The phenotype file must include a subject ID column, containing identifiers that matches the ID in genetic data (i.e. the ``IID`` column in plink ``.fam`` files).
+The file must contain all covariates needed for GWAS analysis, including age, sex, principal genetic components, and other confounters such as genetic batch or plate, if needed. Column names in the phenotype file must be unique. It is OK to include other relevant columns in the phenotype file - a GWAS analysis can be customized to use a subset of columns, as well as a subset of subjects.
+
+Missing values should be encoded by empty string (see example below).
+It is allowed to use ``#`` to comment out first lines.
+Columns required in phenotype file: ``ID`` and ``SEX``.
 
 Phenotype file should be accompanied by a *data dictionary* file, 
 which define whether each variable is a binary (case/control), nominal (a discrete set of values) or continuous.
-The data dictionary should be a file with two columns, one row per variable (listed in the first column), with secon column having values *BINARY*, *NOMINAL*, *CONTINUOUS* or *ID*.     
+The data dictionary should be a file with two columns, one row per variable (listed in the first column),
+with second column having values *BINARY*, *NOMINAL*, *CONTINUOUS* or *ID*.
+The file may have other optional columns, i.e. description of each variable.
+The file should have column names, first two columns must have names ``COLUMN`` and ``TYPE``.
 
-Example ``MoBa.pheno`` file:
+Example ``MoBa/pheno.csv`` file. Subject ``ID=3`` have missing values for ``SEX`` and ``MDD``.
 ```
-ID,MDD,PC1,PC2,PC3
-1,0,0.1,0.2,0.3
-2,1,0.4,0.5,0.6
-3,0,0.6,0.7,0.8
+# optional comments or description
+ID,SEX,MDD,PC1,PC2,PC3
+1,M,0,0.1,0.2,0.3
+2,F,1,0.4,0.5,0.6
+3,,,0.6,0.7,0.8
+4,M,0,0.9,0.1,0.2
+...
 ```
 
-Example ``MoBa.dict`` file:
+Example ``MoBa/pheno.dict`` file:
 ```
-ID,ID
-MDD,BINARY
-PC1,CONTINUOUS
-PC2,CONTINUOUS
-PC3,CONTINUOUS
+COLUMN,TYPE,DESCRIPTION
+ID,ID,Identifier
+SEX,NOMINAL,Sex (M - male, F - female)
+MDD,BINARY,Major depression diagnosis
+PC1,CONTINUOUS,First principal component
+PC2,CONTINUOUS,2nd principal component
+PC3,CONTINUOUS,3rd principal component
+...
 ```
