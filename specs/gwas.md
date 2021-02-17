@@ -1,5 +1,5 @@
 This is a specification of the input data format for GWAS anslysis, recommended in CoMorMent projects.
-Current description is work in progress. Please let us know, any feedback is very welcome!
+Current version: ``v0.9``. Further changes from this version will be documented.
 
 ### Genotypes
  
@@ -94,3 +94,6 @@ PC3,CONTINUOUS,3rd principal component
 ...
 ```
 
+### Change log
+
+* ``v0.9`` - first version of this document
