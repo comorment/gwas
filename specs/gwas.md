@@ -13,8 +13,8 @@ we suggest to organize it into folders as follows ``<STUDY>_<COHORT>``
 
 We expect the data to be in plink format (.bed/.bim.fam), split per chromosomes, organized for example as follows:
 ```
-<BASEPATH>/<COHORT>/chr@.[bed,bim,fam]     # hard calls in plink format (@ indicates chr label)
-<BASEPATH>/<COHORT>/chr@.[vcf.gz,vcf.gz.tbi]  # dosages, either in .vcf or .bgen format
+<BASEPATH>/<COHORT>/chr@.[bed,bim,fam]        # hard calls in plink format (@ indicates chr label)
+<BASEPATH>/<COHORT>/chr@.[vcf.gz,vcf.gz.tbi]  # dosages (either compressed .vcf files, or .bgen format)
 <BASEPATH>/<COHORT>/chr@.[bgen,sample]
 ```
 
@@ -28,7 +28,8 @@ We also recommend to set the data as **read-only** using ``chmod 0444 $BASEPATH/
 
 Many analyses use only plink files.
 However, dosage files are required for some analysis, for example SAIGE.
-It is OK to provide either compressed ``.vcf.gz`` files (with corresponding ``.vcf.gz.tbi`` index),
+For each analysis you need to provide dosage data in a compatible format.
+For example, SAIG recognize either compressed ``.vcf.gz`` files (with corresponding ``.vcf.gz.tbi`` index),
 or ``.bgen / .sample`` formats.
 For ``.vcf.gz``, please note that they should be compressed with ``bgzip`` ([see here](https://www.biostars.org/p/59492/))
 ```
