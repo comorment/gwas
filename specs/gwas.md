@@ -13,10 +13,11 @@ we suggest to organize it into folders as follows ``<STUDY>_<COHORT>``
 
 We expect the data to be in plink format (.bed/.bim.fam), split per chromosomes, organized for example as follows:
 ```
-<BASEPATH>/<COHORT>/chr@.[bed,bim,fam]   # hard calls in plink format (@ indicates chr label)
-<BASEPATH>/<COHORT>/chr@.vcf             # dosages, either in .vcf or .bgen format
+<BASEPATH>/<COHORT>/chr@.[bed,bim,fam]     # hard calls in plink format (@ indicates chr label)
+<BASEPATH>/<COHORT>/chr@.[vcf.gz,vcf.gz.tbi]  # dosages, either in .vcf or .bgen format
 <BASEPATH>/<COHORT>/chr@.[bgen,sample]
 ```
+
 It is recommended (but not required) that all genetic data within cohort is placed into it's own folder.
 A strict requirement is that within each cohort the files are only different by chromosome label, so it is possible
 to specify them by a single prefix with ``@`` symbol indicating the location of a chromosome label.
@@ -25,12 +26,21 @@ If your data is organized differently, we recommend to use
 rather than making a full copy of the data.
 We also recommend to set the data as **read-only** using ``chmod 0444 $BASEPATH/$COHORT/chr*`` command.
 
+Many analyses use only plink files.
+However, dosage files are required for some analysis, for example SAIGE.
+It is OK to provide either compressed ``.vcf.gz`` files (with corresponding ``.vcf.gz.tbi`` index),
+or ``.bgen / .sample`` formats.
+For ``.vcf.gz``, please note that they should be compressed with ``bgzip`` ([see here](https://www.biostars.org/p/59492/))
+```
+bgzip -c file.vcf > file.vcf.gz
+tabix -p vcf file.vcf.gz
+```
+
 In the ``.fam`` files, we require ``IID`` column to be globally unique (not just unique within families).
 Currently there is no need to provide family annotations, sex information, or phenotype information in ``.fam`` files,
 this information is currently not used in the downstream analysis.
 In the future we will consider adding a separate file to add pedigree information,
 to accomodate more complex family structures than what is feasible with ``.fam`` file.
-
 Currently we do not require ``IID`` values to be unique across cohorts.
    
 ### Phenotypes and covariates
