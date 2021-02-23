@@ -44,6 +44,10 @@ this information is currently not used in the downstream analysis.
 In the future we will consider adding a separate file to add pedigree information,
 to accomodate more complex family structures than what is feasible with ``.fam`` file.
 Currently we do not require ``IID`` values to be unique across cohorts.
+  
+At of now, we only support the analysis for autosomes (chr 1..22).
+Support for other chromosomes will came later.
+We expect the same set of individuals across all autosomes (chr 1..22). 
    
 ### Phenotypes and covariates
 
