@@ -1,6 +1,6 @@
 
 
-# Aim: to run R markdown script for query analysis in singularity containers
+# Running R markdown script for query analysis in singularity containers
 
 
 
