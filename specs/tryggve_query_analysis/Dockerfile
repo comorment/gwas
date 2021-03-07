@@ -8,3 +8,5 @@ FROM azab/rmd-tidyverse:test
 
 RUN R -e "install.packages('pracma')"
 RUN R -e "install.packages('stringr')"
+
+ADD . /
