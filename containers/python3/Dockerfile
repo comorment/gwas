@@ -19,6 +19,8 @@ RUN conda install python=3.8 --yes
 RUN conda install -c conda-forge jupyterlab --yes
 RUN conda install numpy scipy pandas statsmodels matplotlib seaborn --yes
 RUN conda install -c conda-forge matplotlib-venn numdifftools lifelines --yes
+RUN conda install -c conda-forge bgenix
+RUN conda install -c bioconda htslib
 
 # Plink (as python_convert depends on plink)
 WORKDIR /tools/plink
