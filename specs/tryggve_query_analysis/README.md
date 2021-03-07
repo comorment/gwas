@@ -14,26 +14,24 @@ Step by Step guide how to run query analysis with singularity container
 
 a-In order to run query analysis you need to have phenofiles for the corresponding sub-cohorts. These phenofiles should have specific format which has been defined [here](https://github.com/comorment/gwas/blob/main/specs/gwas.md)
 
-b-Copy these corresponding phenofiles to the directories where the plink files of the sub-cohorts exist
+b-Copy these corresponding phenofiles to the directories where the plink files of the sub-cohorts exist. Lets call `GENO/` as the directory where includes all cohorts-subcohorts
 
 NOTE: If you have one phenofile which includes samples of all sub-cohorts, we will show how to split them into sub-phenofiles in Step 1. For now, copy this phenofile to all sub-cohort directories where the plink files exist.
 
-c- Download this repo. This repo will be our working directory
 
- Download this repo: `git clone  https://github.com/comorment/gwas`
- 
-Cd into tryggve_query_analysis ` which will be our working directory ` :  `cd specs/tryggve_query_analysis`
 
-d- Download the required singularity containers (python3.sif and rmd-tidyverse.sif) from [Google Drive](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing) to our working directory defined above.
+c- Download the required singularity containers (python3.sif and rmd-tidyverse.sif) from [Google Drive](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing).
 
-e- Prepare the masterfile which defines the path of the phenofiles and plink files as defined [here](https://github.com/comorment/Tryggve_psych/blob/master/tryggve.query1.v2/NOR.tryggve.master.file.tsv) . Please obey the column names. For the demonstration purpose, let's dub this file as  "NOR.tryggve.master.file.tsv " This file should be placed on our working directory as well.
+d- Prepare the masterfile which defines the path of the phenofiles and plink files as defined [here](https://github.com/comorment/Tryggve_psych/blob/master/tryggve.query1.v2/NOR.tryggve.master.file.tsv) . Please obey the column names. For the demonstration purpose, let's dub this file as  "NOR.tryggve.master.file.tsv " 
+
+e- The place of the containers and masterfile should be in same directory. Lets call this directory as `working directory`. This directory should be any parent directory of `GENO/` 
 
 
 ## Step 1 (optional). Splitting phenofile into sub-cohorts and/or filtering interested columns in phenofile
 
 NOTE: This step may only be run if you do not have phenofile specific to each subcohort and/or if you want filter some variables in existing phenofile.  For running this step, .fam  file of each sub-cohort should exist. You may skip this step if you already have sub-cohort specific phenofiles
 
-a- Go to the directory where your masterfile is
+a- Go to the directory where your masterfile is. Download "phenoFile_split.py" to this directory
 
 b- Run python container and CD to current directory as
 
@@ -49,11 +47,23 @@ d- Then in each sub-cohort directory,  new phenofiles have been created with the
 
 ## Step 2. Running the query analysis
 
-a-Download tryggve_query.sif container to the place where your masterfile is (working directory)
+a-Go to the working directory where the containers and masterfile is
 
 b- Run the container by attaching current working directory
 
 `singularity shell --no-home -B $PWD:/INPUT tryggve_query.sif `
+
+c- copy all required files into /INPUT 
+
+```
+cp example.tryggve.master.file.tsv /INPUT
+cp example.tryggve.pheno.file.tsv  /INPUT
+cp -r /fakedata /INPUT
+cp README.md /INPUT
+cp tryggve.query1.v2_help.Rmd /INPUT
+cp tryggve.query1.v2.Rmd /INPUT
+cp tryggve_query.R /INPUT
+```
 
 c- within container `cd INPUT`
 
