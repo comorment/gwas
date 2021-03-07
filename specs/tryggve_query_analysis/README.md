@@ -20,6 +20,10 @@ NOTE: If you have one phenofile which includes samples of all sub-cohorts, we wi
 
 c- Download this repo. This repo will be our working directory
 
+ Download this repo: `git clone  https://github.com/comorment/gwas`
+ 
+Cd into tryggve_query_analysis ## which will be our working directory ##  `cd specs/tryggve_query_analysis`
+
 c- Download the required singularity containers (python3.sif and rmd-tidyverse.sif) from [Google Drive](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing) to our working directory defined above.
 
 e- Prepare the masterfile which defines the path of the phenofiles and plink files as defined [here](https://github.com/comorment/Tryggve_psych/blob/master/tryggve.query1.v2/NOR.tryggve.master.file.tsv) . Please obey the column names. For the demonstration purpose, let's dub this file as  "NOR.tryggve.master.file.tsv " This file should be placed on our working directory as well.
