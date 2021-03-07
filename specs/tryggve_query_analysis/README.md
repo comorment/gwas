@@ -43,7 +43,7 @@ b- Run python container and CD to current directory as
 
 c- Run the function to split phenofile and filter  variates such as
 
- `python phenoFile_split.py  --masterfile='NOR..tryggve.master.file.tsv' --seperator='tab'  --columns='Sex','AnyF32','PC1','height','Age','AnyF33'  `
+ `python phenoFile_split.py  --masterfile='NOR.tryggve.master.file.tsv' --seperator='tab'  --columns='Sex','AnyF32','PC1','height','Age','AnyF33'  `
 
 d- Then in each sub-cohort directory,  new phenofiles have been created with the same name you typed in masterfile. A backup phenofile which includes all samples has also been created. You do not need to modify masterfile.
 
