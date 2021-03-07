@@ -1,0 +1,85 @@
+---
+title: "Tryggve.query1.v2"
+author: "Lu Yi, Kaarina Kowalec, Patrick Sullivan"
+date: "05/05/2020"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+    highlight: textmate
+    df_print: paged
+    code_folding: hide
+params:
+  arg1: "/Users/luyi/Downloads/tryggve"
+  arg2: "NOR"
+
+---
+
+<style type="text/css">
+  .main-container {
+    max-width: 1500px !important;
+  }
+  /* Whole document: */
+  body{
+    font-family: Helvetica;
+    font-size: 12pt;
+  }
+</style>
+
+
+
+### Purpose
+This script aims to create a utility program which does the followings:  
+
++ process desired queries  
++ output metadata on the basic pheno  
+
+<p style="color:red">**N.B. the output from these queries contains aggregated values ONLY - *no inidividual-level data are written out or displayed*.**</p>
+
+***
+## Instructions
+
+
+#### Parameters:
+1. path of the main directory  
+2. country code  
+
+#### Input files:
+1. genotype master file    
+2. phenotype file  
+
+#### Required file format:  
+
+**Input #1: geno master file**  
+*This is a space- or tab-delimited tsv file which contains country or cohort names, file path and file names. One master file per country.*  
+An example is provided in example.tryggve.master.file.tsv, and displayed below.
+```{r}
+if (file.exists("example.tryggve.master.file.tsv")) {
+  tmp1 <- read.table("example.tryggve.master.file.tsv", header=T)
+  head(tmp1)
+} else {
+  print("ERROR: example file missing, ask Lu Yi")
+}
+
+```
+  
+**Input #2: pheno file**  
+*This is a space- or tab-delimited tsv file which contains geno-matched IDs and basic phenotypes. One pheno file per cohort.*  
+The 4 key variables are:  
+
+- IID
+- 2 string variable, Sex ("M"/"F") and MDD (1/0)  
+- 1 continuous variable, tcb_age  
+
+A toy example is provided in example.tryggve.pheno.file.tsv, and displayed below (not real personal data).
+```{r}
+if (file.exists("example.tryggve.pheno.file.tsv")) {
+  tmp2 <- read.table("example.tryggve.pheno.file.tsv", header=T)
+  head(tmp2)
+} else {
+  print("ERROR: example file missing, ask Lu Yi")
+}
+
+```
+

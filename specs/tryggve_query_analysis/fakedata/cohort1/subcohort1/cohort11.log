@@ -1,0 +1,25 @@
+PLINK v1.90b6.9 64-bit (4 Mar 2019)
+Options in effect:
+  --bfile tmp
+  --make-bed
+  --out cohort11
+  --update-ids tmp.ids.tsv
+
+Hostname: MacBook-4.local
+Working directory: /Users/pfsulliv2/Documents/_routines/Rgenetics/tryggve/fakedata/cohort1/subcohort1
+Start time: Fri Nov  8 19:03:59 2019
+
+Random number seed: 1573257839
+8192 MB RAM detected; reserving 4096 MB for main workspace.
+1000 variants loaded from .bim file.
+100 people (0 males, 100 females) loaded from .fam.
+100 phenotype values loaded from .fam.
+--update-ids: 100 people updated.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 100 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+1000 variants and 100 people pass filters and QC.
+Among remaining phenotypes, 45 are cases and 55 are controls.
+--make-bed to cohort11.bed + cohort11.bim + cohort11.fam ... done.
+
+End time: Fri Nov  8 19:03:59 2019
