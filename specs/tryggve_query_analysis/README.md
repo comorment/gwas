@@ -22,7 +22,7 @@ c- Download this repo. This repo will be our working directory
 
  Download this repo: `git clone  https://github.com/comorment/gwas`
  
-Cd into tryggve_query_analysis ## which will be our working directory ##  `cd specs/tryggve_query_analysis`
+Cd into tryggve_query_analysis ` which will be our working directory ` :  `cd specs/tryggve_query_analysis`
 
 c- Download the required singularity containers (python3.sif and rmd-tidyverse.sif) from [Google Drive](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing) to our working directory defined above.
 
