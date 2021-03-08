@@ -79,5 +79,5 @@ or if you exactly have a phenofile defined [here](https://github.com/comorment/g
 `Rscript tryggve_query.R --queryAnalysis='MDD' --pheno='/INPUT/NOR.tryggve.master.file.tsv' --cont_var='PC1,PC2,Age' --bin_var='MDD,Sex' --output=myout9 `
 
 
-As defined in --help, note that the correct format for choosing binary and continious traits are:  "--bin_var='MDD,Sex' " without space in each trait (hence DO NOT type it as "--bin_var='MDD, Sex' " )
+As defined in --help, note that the correct format for choosing binary and continious traits are:  "--bin_var='MDD,Sex' " without space between traits (hence DO NOT type it as "--bin_var='MDD, Sex' " )
 
