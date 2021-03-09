@@ -88,3 +88,34 @@ or if you exactly have a phenofile defined [here](https://github.com/comorment/g
 
 NOTE:As defined in --help, note that the correct format for choosing binary and continious traits are:  "--bin_var='MDD,Sex' " without space between traits (hence DO NOT type it as "--bin_var='MDD, Sex' " )
 
+
+## A Toy Example
+
+Here, we have shown how to run query analysis with a fake data placed container inside. In order to run this you do not need to do the steps above except downloading 'tryggve_query.sif' container
+
+a-  Run the container in any directory you want (lets call this as working directory)
+
+`singularity shell --no-home -B $PWD:/INPUT tryggve_query.sif `
+
+b- copy all required files into your working directory (hence /INPUT) 
+
+```
+cp example.tryggve.master.file.tsv /INPUT
+cp example.tryggve.pheno.file.tsv  /INPUT
+cp -r /fakedata /INPUT
+cp README.md /INPUT
+cp tryggve.query1.v2_help.Rmd /INPUT
+cp tryggve.query1.v2.Rmd /INPUT
+cp tryggve_query.R /INPUT
+```
+
+This time we also need to copy masterfile which has been already designed for corresponding fakedata
+
+`cp NOR.tryggve.master.file.tsv /INPUT`
+
+c- Now you have copied all required files in your working directory. And almost ready to run the alaysis. First `cd INPUT` and then run the following command command
+
+`Rscript tryggve_query.R --queryAnalysis='AnyF33' --pheno='NOR.tryggve.master.file.tsv' --cont_var='PC1,PC2,Age' --bin_var='AnyF33,AnyF22' --output=myout9 `
+
+when you run the command above, you will be failed and this is expected. The reason is ,the phenofiles placed in /fakedata does not completely obey our pre-defined phenofile [structure](https://github.com/comorment/gwas/blob/main/specs/gwas.md). If you open phenofiles such as /fakadata/cohort/subcohor1/cohort11.pheno,
+you will observe that there are some different column name than our pre-defined structure such as 'iid' and 'tcb_age'. Hence if you change these as our agreed format which are 'IID' and 'Age' respectively for each phenofile and re-run the command above you can finish query analysis for the toy example and obtain corresponding .html file.
