@@ -43,7 +43,9 @@ c- Run the function to split phenofile and filter  variates such as
 
  `python phenoFile_split.py  --masterfile='NOR.tryggve.master.file.tsv' --seperator='tab'  --columns='Sex','AnyF32','PC1','height','Age','AnyF33'  `
 
-d- Then in each sub-cohort directory,  new phenofiles have been created with the same name you typed in masterfile. A backup phenofile which includes all samples among all sub-cohorts has also been created. You do not need to modify masterfile.
+Note: correct format for columns is --columns='col1','col2'  (column as a speperator without space hence not as --columns='col1', 'col2')
+
+d- Then in each sub-cohort directory,  new phenofiles have been created with the same name you typed in masterfile. A backup phenofile for the original phenofile has also been created in each sub-cohort. (if your phenofile is phenofile.txt then the backup is phenofile.txt.txt). You do not need to modify masterfile and you may directly go to Step 2.
 
 ## Step 2. Running the query analysis
 
