@@ -14,9 +14,9 @@ Step by Step guide how to run query analysis with singularity container
 
 a-In order to run query analysis you need to have phenofiles for the corresponding sub-cohorts. These phenofiles should have specific format which has been defined [here](https://github.com/comorment/gwas/blob/main/specs/gwas.md)
 
-b-Copy these corresponding phenofiles to the directories where the plink files of the sub-cohorts exist. Lets call `GENO/` as the directory where includes all cohorts-subcohorts
+b-Copy these corresponding phenofiles to the directories where the plink files of the sub-cohorts exist. Lets call `GENO/` as the directory which includes all cohorts-subcohorts
 
-NOTE: If you have one phenofile which includes samples of all sub-cohorts, we will show how to split them into sub-phenofiles in Step 1. For now, copy this phenofile to all sub-cohort directories where the plink files exist.
+NOTE: If you have one phenofile which includes samples of all sub-cohorts, we will show how to split them into sub-phenofiles in Step 1. For now, copy this phenofile to all sub-cohort directories where the plink files exist. If you do not require to run Step1, phenofiles are sufficient to run query analysis hence plinkfile is not required in this case.
 
 
 
@@ -43,7 +43,7 @@ c- Run the function to split phenofile and filter  variates such as
 
  `python phenoFile_split.py  --masterfile='NOR.tryggve.master.file.tsv' --seperator='tab'  --columns='Sex','AnyF32','PC1','height','Age','AnyF33'  `
 
-d- Then in each sub-cohort directory,  new phenofiles have been created with the same name you typed in masterfile. A backup phenofile which includes all samples has also been created. You do not need to modify masterfile.
+d- Then in each sub-cohort directory,  new phenofiles have been created with the same name you typed in masterfile. A backup phenofile which includes all samples among all sub-cohorts has also been created. You do not need to modify masterfile.
 
 ## Step 2. Running the query analysis
 
@@ -70,7 +70,12 @@ c- within container `cd INPUT`
 d- For help (a html file is created to help how to organize masterfile)
 `Rscript tryggve_query.R --help`
 
-e-  For running query analysis (output is created as an html file)
+e-  For running query analysis, basic usage is: (output is created as an html file)
+
+`Rscript tryggve_query.R --queryAnalysis='MainTrait' --pheno='/INPUT/NameOfThemasterfile' --cont_var='continious variables seperated with comma and without space' --bin_var='binary variables seperated with comma and without space' --output=outputname `
+
+Examples:
+
 
 `Rscript tryggve_query.R --queryAnalysis='AnyF32' --pheno='/INPUT/NOR.tryggve.master.file.tsv' --cont_var='PC1,height,Age' --bin_var='AnyF33,AnyF32' --output=myout9 `
 
@@ -79,5 +84,5 @@ or if you exactly have a phenofile defined [here](https://github.com/comorment/g
 `Rscript tryggve_query.R --queryAnalysis='MDD' --pheno='/INPUT/NOR.tryggve.master.file.tsv' --cont_var='PC1,PC2,Age' --bin_var='MDD,Sex' --output=myout9 `
 
 
-As defined in --help, note that the correct format for choosing binary and continious traits are:  "--bin_var='MDD,Sex' " without space between traits (hence DO NOT type it as "--bin_var='MDD, Sex' " )
+NOTE:As defined in --help, note that the correct format for choosing binary and continious traits are:  "--bin_var='MDD,Sex' " without space between traits (hence DO NOT type it as "--bin_var='MDD, Sex' " )
 
