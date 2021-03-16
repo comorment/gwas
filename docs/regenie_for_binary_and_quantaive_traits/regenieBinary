@@ -11,7 +11,8 @@ export covname=mycov
 export phenoname=mypheno
 
 # create a masterfile in your working directory (already created as an example NOR4.tryggve.master.file.tsv)
-# make sure that raw phenofile is placed in /GENO
+# NOTE:make sure that raw phenofile is placed in /GENO
+# NOTE:make sure that you have phenoFile_split2.py in your working directory
 
 singularity shell --no-home -B $PWD:/INPUT -B $GENO:/geno -B $PHENO:/pheno python3.sif
 cd INPUT
