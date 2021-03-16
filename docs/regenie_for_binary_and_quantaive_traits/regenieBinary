@@ -1,0 +1,91 @@
+export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/HCE ; export BATCH=hce; LASTBATCH=2;    # for hce batch
+#export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/OMNI; export BATCH=omni; LASTBATCH=3;  # for omni batch
+export PHENO=/tsd/p697/home/p697-bayramc/data
+export OUT=/cluster/projects/p697/users/bayramc/MDD/regenieOutAll   # OUT directory should be your own custom output directory ( hence do not copy paste it)
+export REF=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/ref
+
+
+# split our pre-determined phenofile to   --covarFile and   --phenoFile in  Regenie format
+
+export covname=mycov
+export phenoname=mypheno
+
+# create a masterfile in your working directory (already created as an example NOR4.tryggve.master.file.tsv)
+# make sure that raw phenofile is placed in /GENO
+
+singularity shell --no-home -B $PWD:/INPUT -B $GENO:/geno -B $PHENO:/pheno python3.sif
+cd INPUT
+
+python phenoFile_split2.py --masterfile='NOR4.tryggve.master.file.tsv' --seperator='tab' --columns='FID','PC1','PC2','PC3','PC4' --outname $covname
+
+python phenoFile_split2.py --masterfile='NOR4.tryggve.master.file.tsv' --seperator='tab' --columns='FID','AnyF','AnyF33' --outname $phenoname
+
+cp /geno/$covname.txt /pheno
+cp /geno/$phenoname.txt /pheno
+
+
+
+# regenie step1
+
+singularity shell --no-home -B $GENO:/geno -B $PHENO:/pheno -B $OUT:/out regenie3.sif
+
+export covname=mycov
+export phenoname=mypheno
+
+for CHRI in {1..22}; do echo "
+  regenie \
+  --step 1 \
+  --bed geno/chr$CHRI.step10 \
+  --covarFile pheno/$covname.txt  \
+  --phenoFile pheno/$phenoname.txt \
+  --bsize 100 \
+  --bt --lowmem \
+  --out out/chr$CHRI.fit_mdd_out"; done | bash
+
+
+
+
+# step 2
+
+for CHRI in {1..22}; do echo "regenie \
+  --step 2 \
+  --bed geno/chr$CHRI.step10.imputed \
+  --covarFile pheno/$covname.txt   \
+  --phenoFile pheno/$phenoname.txt  \
+  --bsize 200 \
+  --bt \
+  --firth --approx \
+  --pThresh 0.01 \
+  --pred out/chr$CHRI.fit_mdd_out_pred.list \
+  --out out/${BATCH}.chr$CHRI.linear"; done | bash
+
+# Since we put two trait: 'AnyF','AnyF33' in phenofile, two output has been created as hce.chr21.linear_AnyF.regenie, hce.chr21.linear_AnyF33.regenie
+# we may do the rest part for each trait seperately
+
+# Note: (chr*.linear_AnyF.regenie has been produced automatically based on your trait name (here it is AnyF))
+
+  singularity shell --no-home -B $OUT:/out -B $REF:/ref python3.sif
+
+
+  python
+  import os, glob, pandas as pd
+  df=pd.concat([pd.read_csv(x, delim_whitespace=True) for x in glob.glob('/out/{}.chr*.linear_AnyF.regenie'.format(os.getenv('BATCH')))])      # update BATCH here
+  df.to_csv('/out/{}.chr.All.linear'.format(os.getenv('BATCH')), index=False, sep='\t')
+
+  singularity shell --no-home -B $OUT:/out -B $REF:/ref python3.sif
+ # Regenie outputs LOG10P instead P (make sure that it is -Log10P) hence we need to convert it to P
+  python
+  import pandas as pd
+  df1=pd.read_csv('/out/hce.chr.All.linear', delimiter='\t')  # change batch name manually here
+  df1['P']=10**(-df1['LOG10P'])
+  df1.to_csv('/out/hce.chr.All2.linear', header=True, index=False, sep='\t') # change batch name manually here
+
+  python /tools/python_convert/qq.py /out/$BATCH.chr.All2.linear --p 'P' --snp ID  --out /out/$BATCH.chr.All.png
+
+
+  python /tools/python_convert/sumstats.py clump \
+ --sumstats  /out/$BATCH.chr.All2.linear --clump-field 'P' --clump-snp-field ID --chr 'CHROM' \
+ --out /out/$BATCH.AnyF.clump \
+ --bfile-chr /ref/1000genomes/EUR.chr@.filt
+
+ python /tools/python_convert/manhattan.py /out/$BATCH.chr.All2.linear --p 'P' --snp ID --bp GENPOS --chr "CHROM" --out /out/$BATCH.AnyF.glm.linear.manh \

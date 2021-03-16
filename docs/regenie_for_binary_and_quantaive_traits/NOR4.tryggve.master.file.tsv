@@ -1,0 +1,7 @@
+tcb_country	tcb_cohort	tcb_subcohort	tcb_folder	tcb_plink	tcb_pheno
+NOR	cohort1	subcohort1	fakedata/cohort1/subcohort1		cohort11.pheno.tsv
+NOR	cohort1	subcohort2	fakedata/cohort1/subcohort2		cohort12.pheno.tsv
+NOR	cohort1	subcohort3	fakedata/cohort1/subcohort3		cohort13.pheno.tsv
+NOR	cohort2	subcohort1	fakedata/cohort2/subcohort1		cohort21.pheno.tsv
+NOR	cohort2	subcohort2	fakedata/cohort2/subcohort2		cohort22.pheno.tsv
+NOR	cohort2	subcohort3	fakedata/cohort2/subcohort3		cohort23.pheno.tsv

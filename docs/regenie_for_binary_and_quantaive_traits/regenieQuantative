@@ -1,0 +1,62 @@
+export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/HCE ; export BATCH=hce; LASTBATCH=2;    # for hce batch
+#export GENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/OMNI; export BATCH=omni; LASTBATCH=3;  # for omni batch
+export PHENO=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/data
+export OUT=/cluster/projects/p697/users/bayramc/outRegenieHeight   # OUT directory should be your own custom output directory ( hence do not copy paste it)
+export REF=/cluster/projects/p697/projects/moba_qc_imputation/OF/gwas/ref
+
+
+# regenie step1
+
+singularity shell --no-home -B $GENO:/geno -B $PHENO:/pheno -B $OUT:/out regenie3.sif
+for CHRI in {1..22}; do echo "
+  regenie \
+  --step 1 \
+  --bed geno/chr$CHRI.step10 \
+  --covarFile pheno/${BATCH}.cov  \
+  --phenoFile pheno/${BATCH}_height.pheno\
+  --bsize 100 \
+  --lowmem-prefix tmp_rg \
+  --out out/chr$CHRI.fit_bin_out"; done | bash
+
+
+# step 2
+
+for CHRI in {1..22}; do echo "regenie \
+  --step 2 \
+  --bed geno/chr$CHRI.step10.imputed \
+  --covarFile pheno/${BATCH}.cov  \
+  --phenoFile pheno/${BATCH}_height.pheno \
+  --bsize 200 \
+  --pThresh 0.01 \
+  --pred out/chr$CHRI.fit_bin_out_pred.list \
+  --out out/${BATCH}.chr$CHRI.linear"; done | bash
+
+  singularity shell --no-home -B $OUT:/out -B $REF:/ref python3.sif
+
+  # (chr*.linear_AnyF.regenie has been produced automatically based on your trait name (here it is AnyF))
+
+
+  python
+  import os, glob, pandas as pd
+  df=pd.concat([pd.read_csv(x, delim_whitespace=True) for x in glob.glob('/out/{}.chr*.linear_Height.regenie'.format(os.getenv('BATCH')))])      # update BATCH here
+  df.to_csv('/out/{}.chr.All.linear'.format(os.getenv('BATCH')), index=False, sep='\t')
+
+  singularity shell --no-home -B $OUT:/out -B $REF:/ref python3.sif
+  # Regenie outputs LOG10P instead P (make sure that it is -Log10P) hence we need to convert it to P
+  python
+  import pandas as pd
+  df1=pd.read_csv('/out/hce.chr.All.linear', delimiter='\t')   # change batch name manually here
+  df1['P']=10**(-df1['LOG10P'])
+  df1.to_csv('/out/hce.chr.All2.linear', header=True, index=False, sep='\t') # change batch name manually here
+
+  python /tools/python_convert/qq.py /out/$BATCH.chr.All2.linear --p 'P' --snp ID  --out /out/$BATCH.chr.All.png
+
+
+  python /tools/python_convert/sumstats.py clump \
+ --sumstats  /out/$BATCH.chr.All2.linear --clump-field 'P' --clump-snp-field ID --chr 'CHROM' \
+ --out /out/$BATCH.height.clump \
+ --bfile-chr /ref/1000genomes/EUR.chr@.filt
+
+ python /tools/python_convert/manhattan.py /out/$BATCH.chr.All2.linear --p 'P' --snp ID --bp GENPOS --chr "CHROM" --out /out/$BATCH.height.glm.linear.manh \
+ --lead /out/$BATCH.height.clump.lead.csv \
+ --indep /out/$BATCH.height.clump.indep.csv
