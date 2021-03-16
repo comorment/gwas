@@ -89,4 +89,4 @@ for CHRI in {1..22}; do echo "regenie \
  --out /out/$BATCH.AnyF.clump \
  --bfile-chr /ref/1000genomes/EUR.chr@.filt
 
- python /tools/python_convert/manhattan.py /out/$BATCH.chr.All2.linear --p 'P' --snp ID --bp GENPOS --chr "CHROM" --out /out/$BATCH.AnyF.glm.linear.manh \
+ python /tools/python_convert/manhattan.py /out/$BATCH.chr.All2.linear --p 'P' --snp ID --bp GENPOS --chr "CHROM" --out /out/$BATCH.AnyF.glm.linear.manh 
