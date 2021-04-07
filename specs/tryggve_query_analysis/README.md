@@ -16,8 +16,7 @@ a-In order to run query analysis you need to have phenofiles for the correspondi
 
 b-Copy these corresponding phenofiles to the directories where the plink files of the sub-cohorts exist. Lets call `GENO/` as the directory which includes all cohorts-subcohorts
 
-NOTE: If you have one phenofile which includes samples of all sub-cohorts, we will show how to split them into sub-phenofiles in Step 1. For now, copy this phenofile to all sub-cohort directories where the plink files exist. If you do not require to run Step1, phenofiles are sufficient to run query analysis hence plinkfile is not required in this case.
-
+NOTE: If you have one phenofile which includes samples of all sub-cohorts, we will show how to split them into sub-phenofiles in Step 1. For now, copy this phenofile to all sub-cohort directories where the plink files exist. 
 
 
 c- Download the required singularity containers (python3.sif and rmd-tidyverse.sif) from [Google Drive](https://drive.google.com/drive/folders/1mfxZJ-7A-4lDlCkarUCxEf2hBIxQGO69?usp=sharing).
