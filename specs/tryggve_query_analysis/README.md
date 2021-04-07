@@ -28,7 +28,7 @@ e- The place of the containers and masterfile should be in same directory. Lets 
 
 ## Step 1 (optional). Splitting phenofile into sub-cohorts and/or filtering interested columns in phenofile
 
-NOTE: This step may only be run if you do not have phenofile specific to each subcohort and/or if you want filter some variables in existing phenofile.  For running this step, .fam  file of each sub-cohort should exist. You may skip this step if you already have sub-cohort specific phenofiles
+NOTE: This step may only be run if you do not have phenofile specific to each subcohort or if you want filter some variables in existing phenofile or if you are not sure whether the samples in plink.fam file and phenofile match perfectly with each other.  For running this step, .fam  file of each sub-cohort should exist. You may skip this step if you already have sub-cohort specific phenofiles which are perfectly matched with the corresponding .fam files.
 
 a- Go to the directory where your masterfile is. Download "phenoFile_split.py" to this directory
 
