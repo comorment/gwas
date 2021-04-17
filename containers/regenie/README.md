@@ -1,4 +1,4 @@
-# To get regenie as a singularity container, run:
+ To get regenie as a singularity container, run:
 
 
- sudo ./singularity/buildFromDocker.sh
+sudo ./singularity/buildFromDocker.sh
