@@ -25,7 +25,7 @@ make docker-build ##
   || docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 # push image to local registry
-docker tag regenie:v2.0.2 localhost:5000/regenie  #tag could be updated depending on the following updates
+docker tag regenie:v2.0.2 localhost:5000/regenie  #tag could be updated depending on the upcuming updates from developers
 docker push localhost:5000/regenie
 
 # create a temporary singularity def file
