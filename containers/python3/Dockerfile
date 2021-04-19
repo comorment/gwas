@@ -32,4 +32,9 @@ WORKDIR /tools/python_convert
 RUN git clone https://github.com/precimed/python_convert.git .
 
 WORKDIR /tools
+COPY /scripts/install_mixer.sh /tmp
+RUN chmod +x /tmp/install_mixer.sh
+RUN bash /tmp/install_mixer.sh
+
+WORKDIR /tools
  
