@@ -45,6 +45,7 @@ WORKDIR /tools/bolt
 COPY /scripts/install_bolt.sh /tmp
 RUN chmod +x /tmp/install_bolt.sh
 RUN bash /tmp/install_bolt.sh
+ENV PATH="/tools/bolt:${PATH}"
 
 # gcta
 WORKDIR /tools/gcta
@@ -93,5 +94,11 @@ WORKDIR /tools/flashpca
 COPY /scripts/install_flashpca.sh /tmp
 RUN chmod +x /tmp/install_flashpca.sh
 RUN bash /tmp/install_flashpca.sh
+
+# regenie
+WORKDIR /tools/regenie
+COPY /scripts/install_regenie.sh /tmp
+RUN chmod +x /tmp/install_regenie.sh
+RUN bash /tmp/install_regenie.sh
 
 WORKDIR /tools
