@@ -35,10 +35,13 @@ RUN bash /tmp/install_mixer.sh
 ENV BGMG_SHARED_LIBRARY="/tools/mixer/src/build/lib/libbgmg.so"
 
 WORKDIR /tools/python_convert
-RUN git clone https://github.com/precimed/python_convert.git .
+RUN git clone https://github.com/precimed/python_convert.git . && git reset --hard bcde562f0286f3ff271dbb54d486d4ca1d40ae36
 
 WORKDIR /tools/ukb
 RUN git clone https://github.com/precimed/ukb.git
+
+RUN yes | pip install pyreadstat
+RUN yes | pip install xlrd
 
 WORKDIR /tools
  

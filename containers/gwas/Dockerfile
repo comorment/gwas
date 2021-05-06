@@ -100,5 +100,7 @@ WORKDIR /tools/regenie
 COPY /scripts/install_regenie.sh /tmp
 RUN chmod +x /tmp/install_regenie.sh
 RUN bash /tmp/install_regenie.sh
+# https://github.com/potree/PotreeConverter/issues/281
+ENV LC_ALL="C"
 
 WORKDIR /tools
