@@ -1,1 +1,1 @@
-This specification is copied to github.com/comorment/containers repository. See [here](https://github.com/comorment/containers/blob/main/gwas/pheno_geno_specification.md) for the latest version.
+This specification is copied to http://github.com/comorment/containers repository. See [here](https://github.com/comorment/containers/blob/main/gwas/pheno_geno_specification.md) for the latest version.
