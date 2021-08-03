@@ -31,3 +31,47 @@ All containers have a shared layer of common utilities (``wget``, ``gzip``, etc)
 ## Feedback
 
 If you face any issues, or if you need additional software, please let us know by creating an [issue](https://github.com/comorment/gwas/issues/new). 
+
+## Note about NREC machine
+
+We use NREC machine to develop and build containers.
+NREC machine has small local disk (~20 TB) and a larger external volume attached (~400 TB)
+If you use NREC machine, it's important to not store large data or install large software to your home folder which is located on a small disk,
+using ``/nrec/projects space`` instead:
+
+```
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/sda1                           20G  4.7G   15G  25% /
+/dev/mapper/nrec_extvol-comorment  393G  106G  268G  29% /nrec/projects
+```
+
+Both docker and singularity were configured to avoid placing cached files into local file system.
+For docker this involves changing ``/etc/docker/daemon.json`` file by adding this:
+```
+{ 
+    "data-root": "/nrec/projects/docker_root"
+}
+```
+(as described https://tienbm90.medium.com/how-to-change-docker-root-data-directory-89a39be1a70b ; you may use ``docker info`` command to check the data-root)
+
+For singularity, the configuration is described here https://sylabs.io/guides/3.6/user-guide/build_env.html
+and it was done for the root user by adding  the following line into /etc/environment
+```
+export SINGULARITY_CACHEDIR="/nrec/projects/singularity_cache"
+```
+
+Common software, such as git-lfs, is installed to /nrec/project/bin. 
+Therefore it's reasonable for all users of the NREC comorment instance
+to add this folder to the path by changing ``~/.bashrc`` and ``~/.bash_profile``.
+```
+export PATH="/nrec/projects/bin:$PATH"
+```
+
+A cloned version of comorment repositories is available here:
+```
+/nrec/projects/github/comorment/containers
+/nrec/projects/github/comorment/reference
+```
+Feel free to change these folders and use git pull / git push. TBD: currently the folder is cloned as 'ofrei' user - I'm not sure if it will actually work to pull & push. But let's figure this out.
+
+
