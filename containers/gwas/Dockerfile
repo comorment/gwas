@@ -103,4 +103,16 @@ RUN bash /tmp/install_regenie.sh
 # https://github.com/potree/PotreeConverter/issues/281
 ENV LC_ALL="C"
 
+# gwama
+WORKDIR /tools/gwama
+COPY /scripts/install_gwama.sh /tmp
+RUN chmod +x /tmp/install_gwama.sh
+RUN bash /tmp/install_gwama.sh
+
+# magma
+WORKDIR /tools/magma
+COPY /scripts/install_magma.sh /tmp
+RUN chmod +x /tmp/install_magma.sh
+RUN bash /tmp/install_magma.sh
+
 WORKDIR /tools

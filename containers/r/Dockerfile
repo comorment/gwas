@@ -1,5 +1,5 @@
 # R container
-FROM 'ubuntu:18.04'
+FROM rocker/verse:4.0.3
 
 ENV TZ=Europe
 ENV DEBIAN_FRONTEND noninteractive
@@ -10,17 +10,7 @@ COPY /scripts/apt_get_essential.sh .
 RUN chmod +x apt_get_essential.sh
 RUN bash apt_get_essential.sh
 
-# R
-WORKDIR /tmp
-COPY /scripts/install_r.sh /tmp
-RUN chmod +x install_r.sh
-RUN bash install_r.sh
-
-# Rstudio
-WORKDIR /tmp
-COPY /scripts/install_rstudio.sh /tmp
-RUN chmod +x install_rstudio.sh
-RUN bash install_rstudio.sh
+RUN apt-get update -y && apt-get install -y libperl-dev
 
 # R packages
 RUN R -e "install.packages('rmarkdown')"
@@ -28,17 +18,25 @@ RUN R -e "install.packages('ggplot2')"
 RUN R -e "install.packages('data.table')"
 RUN R -e "install.packages('optparse')"
 RUN R -e "install.packages('foreign')"
+RUN R -e "install.packages('mvtnorm')"
 
-# saige
-#WORKDIR /tools/saige
-#COPY /scripts/install_saige.sh /tools/saige
-#RUN chmod +x install_saige.sh
-#RUN bash install_saige.sh
+RUN R -e "setRepositories(ind=1:8); install.packages('devtools')"
 
-# genomicsam
-#WORKDIR /tools/genomicsam
-#COPY /scripts/install_genomicsam.sh /tools/genomicsam
-#RUN chmod +x install_genomicsam.sh
-#RUN bash install_genomicsam.sh
+RUN R -e "library(devtools); install_github('zhanxw/seqminer')"
+RUN R -e "library(devtools); install_github('dajiangliu/rareGWAMA')"
+RUN R -e "library(devtools); install_github('GenomicSEM/GenomicSEM')"
+
+RUN R -e "install.packages('remotes')"
+RUN R -e "remotes::install_github('MRCIEU/TwoSampleMR')"
+
+RUN R -e "install.packages('survey')"
+RUN R -e "install.packages('http://cnsgenomics.com/software/gsmr/static/gsmr_1.0.9.tar.gz',repos=NULL,type='source')"
+
+# gcta (good to have this in R container because gsmr package uses gcta)
+WORKDIR /tools/gcta
+COPY /scripts/install_gcta.sh /tmp
+RUN chmod +x /tmp/install_gcta.sh
+RUN bash /tmp/install_gcta.sh
 
 WORKDIR /tools
+
