@@ -42,6 +42,9 @@ RUN git clone https://github.com/precimed/ukb.git
 
 RUN yes | pip install pyreadstat
 RUN yes | pip install xlrd
+RUN yes | pip install plinkio
+RUN yes | pip install ldpred
+RUN yes | pip install h5py
 
 WORKDIR /tools
  
