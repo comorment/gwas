@@ -45,6 +45,7 @@ RUN yes | pip install xlrd
 RUN yes | pip install plinkio
 RUN yes | pip install ldpred
 RUN yes | pip install h5py
+RUN yes | pip install pycap
 
 WORKDIR /tools
  
