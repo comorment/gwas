@@ -47,6 +47,7 @@ COPY /scripts/install_lava_partitioning.sh /tmp
 RUN chmod +x /tmp/install_lava_partitioning.sh
 RUN bash /tmp/install_lava_partitioning.sh
 
+RUN R -e "install.packages('qqman')"
 
 WORKDIR /tools
 
