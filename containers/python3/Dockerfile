@@ -47,5 +47,7 @@ RUN yes | pip install ldpred
 RUN yes | pip install h5py
 RUN yes | pip install pycap
 
+RUN conda install -c anaconda yaml --yes
+
 WORKDIR /tools
  
