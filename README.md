@@ -60,7 +60,7 @@ and it was done for the root user by adding  the following line into /etc/enviro
 export SINGULARITY_CACHEDIR="/nrec/projects/singularity_cache"
 ```
 
-Common software, such as git-lfs, is installed to /nrec/project/bin. 
+Common software, such as git-lfs, is installed to /nrec/projects/bin. 
 Therefore it's reasonable for all users of the NREC comorment instance
 to add this folder to the path by changing ``~/.bashrc`` and ``~/.bash_profile``.
 ```
