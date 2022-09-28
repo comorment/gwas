@@ -41,8 +41,11 @@ using ``/nrec/projects space`` instead:
 
 ```
 Filesystem                         Size  Used Avail Use% Mounted on
-/dev/sda1                           20G  4.7G   15G  25% /
-/dev/mapper/nrec_extvol-comorment  393G  106G  268G  29% /nrec/projects
+/dev/sda1                               20G  9.6G  9.7G  50% /
+/dev/mapper/nrec_extvol-comorment      393G  346G   28G  93% /nrec/projects
+/dev/mapper/nrec_extvol_2-comorment_2  935G  609G  279G  69% /nrec/space
+
+
 ```
 
 Both docker and singularity were configured to avoid placing cached files into local file system.
