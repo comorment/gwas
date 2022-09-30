@@ -1,3 +1,6 @@
+## This project is now legacy!
+Please use files in https://github.com/comorment/containers/src instead. 
+
 ## Singularity containers for GWAS and post-GWAS analysis
 This repository is used to develop and document singularity containers with various software and analytical tools for GWAS and post-GWAS analysis.
 
